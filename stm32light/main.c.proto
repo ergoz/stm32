@@ -1,0 +1,140 @@
+#include "stm32f10x.h"
+#include "stm32f10x_gpio.h"
+#include "stm32f10x_rcc.h"
+#include "stm32f10x_tim.h"
+#include "motion.h"
+#include "led.h"
+#include "timer.h"
+#include "interrupt.h"
+#define LC_INCLUDE "lc-addrlabels.h"
+#include "pt.h"
+
+// global vars
+
+volatile MotionState_t g_currentMotion = MotionState_Off;
+volatile ButtonState_t g_currentButton = ButtonState_Off;
+
+// func def
+
+void InitAll( void);
+static void vMotCbState(MotionState_t state);
+static void vBtnCbState(ButtonState_t state);
+
+// func decl
+
+int ptLoopThread(struct pt *pt)
+{
+	PT_BEGIN(pt);
+
+    InterruptStatus_t status;
+	MotionState_t currentMotion = MotionState_Off;
+	ButtonState_t currentButton = ButtonState_Off;
+	uint32_t timeMs=0, lastTime=0, lastBtnTime=0;
+	int32_t motionEnabled=0, ledActive=0;
+
+    while(1)
+    {
+    	timeMs = uiTimerGetMs();
+
+        status = Interrupt_saveAndDisable();
+        currentMotion=g_currentMotion;
+        g_currentMotion = MotionState_Off;
+        currentButton=g_currentButton;
+        g_currentButton = ButtonState_Off;
+        Interrupt_restore(status);
+
+        if (currentMotion == MotionState_On)
+        {
+        	if (motionEnabled)
+        	{
+        		lastTime=timeMs;
+
+        		if (!ledActive)
+        		{
+        			vLedAddState(LedState_White, 100);
+        			ledActive=1;
+        		}
+        	}
+        	currentMotion = MotionState_Off;
+        }
+
+        if (currentButton == ButtonState_On)
+        {
+        	if ((timeMs - lastBtnTime)>100) // delay
+        	{
+        		if (!motionEnabled)
+        		{
+        			vLedAddState(LedState_Green, 100);
+        			vLedAddState(LedState_Off, 0);
+        			motionEnabled=1;
+        		}
+        		else
+        		{
+        			vLedAddState(LedState_Off, 0);
+        			vLedAddState(LedState_Red, 100);
+        			vLedAddState(LedState_Off, 0);
+        			motionEnabled=0;
+        			ledActive=0;
+        			lastTime=0;
+        		}
+        	}
+
+        	lastBtnTime = timeMs;
+        	currentButton = ButtonState_Off;
+        }
+
+        if (ledActive)
+        {
+        	if ((timeMs-lastTime) > (30 * 1000)) // timeout
+        	{
+        		ledActive=!ledActive;
+        		vLedAddState(LedState_Off, 0);
+        	}
+        }
+
+        PT_YIELD(pt);
+    }
+
+	PT_END(pt);
+}
+
+
+int main(void)
+{
+	struct pt ptLoop,ptLed;
+
+	PT_INIT(&ptLoop);
+	PT_INIT(&ptLed);
+
+	InitAll();
+
+	while ( PT_SCHEDULE(ptLoopThread(&ptLoop))
+			&& PT_SCHEDULE(ptLedThread(&ptLed)) )
+	                ;
+
+	// never should be there
+	while (1) {};
+
+	return 0;
+}
+
+void InitAll( void)
+{
+	vLedInit();
+	vMotionInit();
+	vTimerInit();
+
+	vMotionCbState(vMotCbState);
+	vButtonCbState(vBtnCbState);
+}
+
+static void vMotCbState(MotionState_t state)
+{
+	g_currentMotion=state;
+}
+
+static void vBtnCbState(ButtonState_t state)
+{
+	g_currentButton=state;
+}
+
