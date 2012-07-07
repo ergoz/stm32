@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32light.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32light --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32light\link.ld -g">
+      <target file="stm32light.elf" lastModified="138638a8fea">
+         <source file="..\obj\semihosting.o" lastModified="138638a6372"/>
+         <source file="..\obj\spi.o" lastModified="138638a8e36"/>
+         <source file="..\obj\stm32f10x_tim.o" lastModified="138638a64f2"/>
+         <source file="..\obj\core_cm3.o" lastModified="138638a6550"/>
+         <source file="..\obj\timer.o" lastModified="138638a65da"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="138638a664c"/>
+         <source file="..\obj\startup_stm32f10x_md.o" lastModified="138638a669a"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="138638a672a"/>
+         <source file="..\obj\main.o" lastModified="138638a67db"/>
+         <source file="..\obj\printf.o" lastModified="138638a68d4"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="138638a6982"/>
+         <source file="..\obj\stm32f10x_exti.o" lastModified="138638a69f1"/>
+         <source file="..\obj\sh_cmd.o" lastModified="138638a6a1d"/>
+         <source file="..\obj\syscalls.o" lastModified="138638a6a9a"/>
+         <source file="..\obj\exti.o" lastModified="138638a6b40"/>
+         <source file="..\obj\queue.o" lastModified="138638a6bb7"/>
+         <source file="..\obj\stm32f10x_dma.o" lastModified="138638a8eaa"/>
+         <source file="..\obj\dht22.o" lastModified="138638a6c44"/>
+         <source file="..\obj\misc.o" lastModified="138638a6cb1"/>
+         <source file="..\obj\stm32f10x_spi.o" lastModified="138638a6d4c"/>
+         <source file="..\obj\stm32f10x_i2c.o" lastModified="138638a6de5"/>
+         <source file="..\obj\nrf.o" lastModified="138638a8f40"/>
+      </target>
+   </processor>
+</history>

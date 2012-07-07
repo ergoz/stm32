@@ -17,10 +17,9 @@
 						<entry flags="" kind="includePath" name="C:\Program Files (x86)\arm-none-eabi-gcc-4_6\lib\gcc\arm-none-eabi\4.6.2\include"/>
 						<entry flags="" kind="includePath" name="C:\Program Files (x86)\arm-none-eabi-gcc-4_6\lib\gcc\arm-none-eabi\4.6.2\include-fixed"/>
 						<entry flags="" kind="includePath" name="."/>
-						<entry flags="" kind="includePath" name="C:/CooCox/CoIDE/workspace/libs"/>
+						<entry flags="" kind="includePath" name="C:/CooCox/CoIDE/workspace/stm32/libs"/>
 						<entry flags="" kind="includePath" name="cmsis"/>
 						<entry flags="" kind="includePath" name="cmsis_boot"/>
-						<entry flags="" kind="includePath" name="pt-1.4"/>
 						<entry flags="" kind="includePath" name="semihosting"/>
 						<entry flags="" kind="includePath" name="stm_lib"/>
 						<entry flags="" kind="includePath" name="stm_lib/inc"/>
@@ -32,33 +31,27 @@
 					</externalSetting>
 				</externalSettings>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
-			<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 			<storageModule moduleId="org.eclipse.cdt.core.pathentry">
 				<pathentry kind="src" path=""/>
 				<pathentry include="C:/Program Files (x86)/arm-none-eabi-gcc-4_6/arm-none-eabi/include" kind="inc" path="" system="true"/>
 				<pathentry include="C:/Program Files (x86)/arm-none-eabi-gcc-4_6/lib/gcc/arm-none-eabi/4.6.2/include" kind="inc" path="" system="true"/>
 				<pathentry include="C:/Program Files (x86)/arm-none-eabi-gcc-4_6/lib/gcc/arm-none-eabi/4.6.2/include-fixed" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light" kind="inc" path="" system="true"/>
-				<pathentry include="C:/CooCox/CoIDE/workspace/libs" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/cmsis" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/cmsis_boot" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/pt-1.4" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/semihosting" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/stm_lib" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/stm_lib/inc" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/libs" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light/cmsis" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light/cmsis_boot" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light/semihosting" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light/stm_lib" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light/stm_lib/inc" kind="inc" path="" system="true"/>
 				<pathentry include="C:/Program Files (x86)/arm-none-eabi-gcc-4_6/arm-none-eabi/include" kind="inc" path="" system="true"/>
 				<pathentry include="C:/Program Files (x86)/arm-none-eabi-gcc-4_6/lib/gcc/arm-none-eabi/4.6.2/include" kind="inc" path="" system="true"/>
 				<pathentry include="C:/Program Files (x86)/arm-none-eabi-gcc-4_6/lib/gcc/arm-none-eabi/4.6.2/include-fixed" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/cmsis" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/cmsis_boot" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/pt-1.4" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/semihosting" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/stm_lib" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/stm_lib/inc" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/STM32_USB-FS-Device_Driver/inc" kind="inc" path="" system="true"/>
-				<pathentry include="S:/My Dropbox/Radio/projects/CooCox/stm32light/USB" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light/cmsis" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light/cmsis_boot" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light/semihosting" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light/stm_lib" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32light/stm_lib/inc" kind="inc" path="" system="true"/>
 				<pathentry kind="mac" name="__GNUC__" path="" value=""/>
 				<pathentry kind="mac" name="STM32F10X_MD" path="" value=""/>
 				<pathentry kind="mac" name="USE_STDPERIPH_DRIVER" path="" value=""/>

@@ -1,7 +1,7 @@
   AppVersion = 45011
 [GENERAL]
   ConnectMode = 0
-  CurrentFile = "S:\My Dropbox\Radio\projects\CooCox\stm32light\Debug\bin\stm32light.bin"
+  CurrentFile = "C:\CooCox\CoIDE\workspace\stm32\stm32light\Debug\bin\stm32light.bin"
   DataFileSAddr = 0x08000000
   GUIMode = 0
   HostName = ""
