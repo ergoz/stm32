@@ -142,6 +142,7 @@ uint8_t uNrfGetFifoStatus(void)
 void vNrfSend(uint8_t * addr, uint8_t *data, uint8_t len)
  {
 	uint8_t status;
+	static uint8_t last_addr[NRF_ADR_LEN];
 
 	while (g_uNrfTx)	// this should be never executed code!
 	{
@@ -154,8 +155,12 @@ void vNrfSend(uint8_t * addr, uint8_t *data, uint8_t len)
 		}
 	}
 
-	uNrfWriteBuf(TX_ADDR, addr, NRF_ADR_LEN);
-	uNrfWriteBuf(RX_ADDR_P0, addr, NRF_ADR_LEN);
+	if (memcmp(last_addr, addr, 5)!=0)
+	{
+		memcpy(last_addr, addr, 5);
+		uNrfWriteBuf(TX_ADDR, addr, NRF_ADR_LEN);
+		uNrfWriteBuf(RX_ADDR_P0, addr, NRF_ADR_LEN);
+	}
 
 	CE_L();
 	vNrfPowerUpTx();

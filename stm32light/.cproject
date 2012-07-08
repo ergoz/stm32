@@ -32,6 +32,7 @@
 				</externalSettings>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
+			<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 			<storageModule moduleId="org.eclipse.cdt.core.pathentry">
 				<pathentry kind="src" path=""/>
 				<pathentry include="C:/Program Files (x86)/arm-none-eabi-gcc-4_6/arm-none-eabi/include" kind="inc" path="" system="true"/>

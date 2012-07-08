@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32usb.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32usb --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32usb\link.ld -g">
-      <target file="stm32usb.elf" lastModified="1386648f42d">
+      <target file="stm32usb.elf" lastModified="13867fd7584">
          <source file="..\obj\otgd_fs_pcd.o" lastModified="1386627e6f0"/>
          <source file="..\obj\semihosting.o" lastModified="1386627e750"/>
          <source file="..\obj\usb_core.o" lastModified="1386627e80b"/>
@@ -39,7 +39,7 @@
          <source file="..\obj\misc.o" lastModified="1386627f5fb"/>
          <source file="..\obj\stm32f10x_spi.o" lastModified="1386627f687"/>
          <source file="..\obj\usb_mem.o" lastModified="1386627f6e0"/>
-         <source file="..\obj\nrf.o" lastModified="1386627f768"/>
+         <source file="..\obj\nrf.o" lastModified="13867fd7474"/>
          <source file="..\obj\usb_istr.o" lastModified="1386627f7bd"/>
       </target>
    </processor>
