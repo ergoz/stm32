@@ -63,14 +63,16 @@ void InitAll(void)
 	vExtiStart();
 }
 
-void NrfPacketTest(uint8_t *target, uint8_t count)
+void NrfPacketTest(uint8_t *target, uint32_t count)
 {
-	uint32_t lost, t, k, fail;
+	uint32_t lost, t, k, total;
 	uint8_t payload_size;
 	uint8_t name[6];
+	uint8_t buf[32];
 
 	memset(name, 0, 6);
 	memcpy(name, target, 5);
+	total=0;
 
 	if (count==1)
 		vUsbserialWrite("Ping: ");
@@ -82,27 +84,25 @@ void NrfPacketTest(uint8_t *target, uint8_t count)
 	lost = 0;
 	for (k = 0; k < count; k++)
 	{
+		memset(buf, 0, 32);
 		t = uTimerGetMs();
+		memcpy(buf, &t, 4);
 
-		fail=255;
-		while (fail--)
-		{
-			vNrfSend((uint8_t *) name, (uint8_t *) &t, 4);
-			while (uNrfIsSending()) {};
-			if (uNrfGetLastTxStatus())
-				break;
-			vUsbserialWrite(">");
-		}
+		vNrfSend((uint8_t *) name, (uint8_t *) buf, 32);
+
+		while (uNrfIsSending()) {};
 
 		while ((uTimerGetMs() - t) < 100)
 		{
 			if (!uNrfIsSending() && uNrfIsPayloadReceived())
 			{
 				payload_size = uNrfGetPayloadSize();
-				if (payload_size==4)
-					uNrfGetPayload((uint8_t *) &t, 4);
+				if (payload_size==32)
+					uNrfGetPayload((uint8_t *) buf, 32);
 
+				memcpy(&t, buf, 4);
 				t = uTimerGetMs() - t;
+				total+=t;
 
 				vUsbserialWrite(".");
 				if (count==1)
@@ -113,6 +113,14 @@ void NrfPacketTest(uint8_t *target, uint8_t count)
 					else
 						vUsbserialWrite(myitoa(t, 10));
 					vUsbserialWrite(" ms\r\n");
+
+					memcpy(&t, buf+4, 4);
+					vUsbserialWrite("Lux: ");
+					if (!t)
+						vUsbserialWrite("0");
+					else
+						vUsbserialWrite(myitoa(t, 10));
+					vUsbserialWrite("\r\n");
 				}
 				t = 0;
 				break;
@@ -126,7 +134,7 @@ void NrfPacketTest(uint8_t *target, uint8_t count)
 				vUsbserialWrite("X");
 			lost++;
 		}
-		vTimerDelayMs(10);
+		//vTimerDelayMs(1);
 	}
 	if (count!=1)
 	{
@@ -136,11 +144,45 @@ void NrfPacketTest(uint8_t *target, uint8_t count)
 		else
 			vUsbserialWrite(myitoa(lost, 10));
 		vUsbserialWrite("\r\n");
+
+		vUsbserialWrite("Average response time: ");
+		if (!total)
+			vUsbserialWrite("0");
+		else
+			vUsbserialWrite(myitoa(total/count, 10));
+		vUsbserialWrite("\r\n");
+
 	}
+}
+
+void vDhtTest(void)
+{
+	vDht22Start();
+	//vTimerDelayMs(2000);
+	while (uDht22Measuring()){};
+
+	if (uDht22CheckCrc())
+	{
+		vUsbserialWrite("Temp: ");
+		vUsbserialWrite(myitoa(uDht22GetTemp() / 10, 10));
+		vUsbserialWrite(".");
+		vUsbserialWrite(myitoa(uDht22GetTemp() % 10, 10));
+		vUsbserialWrite("\r\n");
+
+		vUsbserialWrite("Humidity: ");
+		vUsbserialWrite(myitoa(uDht22GetHumidity() / 10, 10));
+		vUsbserialWrite(".");
+		vUsbserialWrite(myitoa(uDht22GetHumidity() % 10, 10));
+		vUsbserialWrite("\r\n");
+	}
+	else
+		vUsbserialWrite("CRC check failed!\r\n");
 }
 
 uint8_t handle_cmd(uint8_t *buf)
 {
+	uint8_t cnt;
+
 	if (strlen((const char *) buf) > 5 &&
 			memcmp((const char *) buf, (const char *) "status", 6) == 0)
 	{
@@ -151,7 +193,7 @@ uint8_t handle_cmd(uint8_t *buf)
 	if (strlen((const char *)buf)>9 &&
 			memcmp((const char *)buf, (const char *)"test", 4)==0)
 	{
-		NrfPacketTest(&buf[5], 100);
+		NrfPacketTest(&buf[5], 500);
 		return 1;
 	}
 
@@ -165,26 +207,11 @@ uint8_t handle_cmd(uint8_t *buf)
 	if (strlen((const char *)buf)>4 &&
 			memcmp((const char *)buf, (const char *)"dht22", 5)==0)
 	{
-		vDht22Start();
-		//vTimerDelayMs(2000);
-		while (uDht22Measuring()){};
-
-		if (uDht22CheckCrc())
+		for (cnt=0; cnt<10; cnt++)
 		{
-			vUsbserialWrite("Temp: ");
-			vUsbserialWrite(myitoa(uDht22GetTemp() / 10, 10));
-			vUsbserialWrite(".");
-			vUsbserialWrite(myitoa(uDht22GetTemp() % 10, 10));
-			vUsbserialWrite("\r\n");
-
-			vUsbserialWrite("Humidity: ");
-			vUsbserialWrite(myitoa(uDht22GetHumidity() / 10, 10));
-			vUsbserialWrite(".");
-			vUsbserialWrite(myitoa(uDht22GetHumidity() % 10, 10));
-			vUsbserialWrite("\r\n");
+			vDhtTest();
+			vTimerDelayMs(2000);
 		}
-		else
-			vUsbserialWrite("CRC check failed!\r\n");
 
 		return 1;
 	}

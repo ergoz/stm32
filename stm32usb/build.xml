@@ -48,6 +48,12 @@
       <fileset dir="C:\CooCox\CoIDE\workspace\stm32\libs">
         <include name="**/*.c"/>
         <include name="**/*.s"/>
+        <exclude name="led.c"/>
+        <exclude name="led.h"/>
+        <exclude name="light.c"/>
+        <exclude name="light.h"/>
+        <exclude name="motion.c"/>
+        <exclude name="motion.h"/>
       </fileset>
       <project outfile="${project.name}.elf" overwrite="true" type="xcode"/>
       

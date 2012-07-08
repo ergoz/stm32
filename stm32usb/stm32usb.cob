@@ -23,6 +23,12 @@
     <Exclude path="S:\My Dropbox\Radio\projects\CooCox\stm32light\pt-1.4\example-buffer.c"/>
     <Exclude path="S:\My Dropbox\Radio\projects\CooCox\stm32light\pt-1.4\example-codelock.c"/>
     <Exclude path="S:\My Dropbox\Radio\projects\CooCox\stm32light\pt-1.4\example-small.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\led.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\led.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\light.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\light.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\motion.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\motion.h"/>
   </ExcludedFiles>
   <Drivers/>
 </Project>

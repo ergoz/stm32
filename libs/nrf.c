@@ -148,6 +148,7 @@ void vNrfSend(uint8_t * addr, uint8_t *data, uint8_t len)
 		status = uNrfReadReg(STATUS);
 		if (status & ( (1 << TX_DS) | (1 << MAX_RT) ) )
 		{
+			uNrfWriteReg(STATUS, (1 << TX_DS) | (1 << MAX_RT));
 			g_uNrfTx=0;
 			break;
 		}

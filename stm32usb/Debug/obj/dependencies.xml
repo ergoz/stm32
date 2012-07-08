@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dependencies>
-   <includePath signature="/I. /Icmsis /Icmsis_boot /Istm_lib /Istm_lib\inc /ISTM32_USB-FS-Device_Driver\inc /IUSB /I..\STM32_USB /I..\STM32_USB-FS-Device_Driver\inc /I..\STM32_USB-FS-Device_Driver /I..\libs /Isemihosting">
+   <includePath signature="/I. /Icmsis /Icmsis_boot /Istm_lib /Istm_lib\inc /ISTM32_USB-FS-Device_Driver\inc /IUSB /I..\..\STM32_USB /I..\..\STM32_USB-FS-Device_Driver\inc /I..\..\STM32_USB-FS-Device_Driver /I..\..\libs /Isemihosting /I..\STM32_USB /I..\STM32_USB-FS-Device_Driver\inc /I..\STM32_USB-FS-Device_Driver /I..\libs">
       <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_int.c" lastModified="12ecc885c60">
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
       </source>
@@ -14,7 +14,7 @@
          <include file="..\..\..\libs\queue.h"/>
          <include file="..\..\..\libs\interrupt.h"/>
       </source>
-      <source file="..\..\..\libs\exti.c" lastModified="1385d776cc7">
+      <source file="..\..\..\libs\exti.c" lastModified="1386627e127">
          <include file="..\..\cmsis_boot\stm32f10x.h"/>
          <include file="..\..\stm_lib\inc\stm32f10x_gpio.h"/>
          <include file="..\..\stm_lib\inc\stm32f10x_rcc.h"/>
@@ -76,7 +76,7 @@
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\otgd_fs_cal.h"/>
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\otgd_fs_pcd.h"/>
       </source>
-      <source file="..\..\..\STM32_USB\usb_endp.c" lastModified="1381f1ee9ef">
+      <source file="..\..\..\STM32_USB\usb_endp.c" lastModified="1381f1ef1b0">
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
          <include file="..\..\..\STM32_USB\usb_desc.h"/>
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_mem.h"/>
@@ -219,7 +219,7 @@
          <include file="..\..\cmsis_boot\stm32f10x.h"/>
          <include file="..\..\cmsis\core_cm3.h"/>
       </source>
-      <source file="..\..\..\libs\nrf.c" lastModified="138634d8579">
+      <source file="..\..\..\libs\nrf.c" lastModified="138660bd435">
          <include file="..\..\..\libs\spi.h"/>
          <include file="..\..\cmsis_boot\stm32f10x.h"/>
          <include file="..\..\stm_lib\inc\stm32f10x_rcc.h"/>
@@ -289,7 +289,7 @@
       </source>
       <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_int.h" lastModified="12ecc885c60">
       </source>
-      <source file="..\..\..\STM32_USB\hw_config.h" lastModified="137b401997d">
+      <source file="..\..\..\STM32_USB\hw_config.h" lastModified="137b4019e50">
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_type.h"/>
       </source>
       <source file="..\..\..\STM32_USB-FS-Device_Driver\src\otgd_fs_dev.c" lastModified="12ecc885c60">
@@ -304,7 +304,7 @@
       </source>
       <source file="..\..\..\libs\nRF24L01.h" lastModified="13819614750">
       </source>
-      <source file="..\..\..\STM32_USB\hw_config.c" lastModified="13839bdead2">
+      <source file="..\..\..\STM32_USB\hw_config.c" lastModified="138662698c4">
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
          <include file="..\..\..\STM32_USB\usb_prop.h"/>
          <include file="..\..\..\STM32_USB\usb_desc.h"/>

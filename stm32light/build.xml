@@ -40,6 +40,8 @@
       <fileset dir="C:\CooCox\CoIDE\workspace\stm32\libs">
         <include name="**/*.c"/>
         <include name="**/*.s"/>
+        <exclude name="dht22.c"/>
+        <exclude name="dht22.h"/>
         <exclude name="usbserial.c"/>
         <exclude name="usbserial.h"/>
       </fileset>

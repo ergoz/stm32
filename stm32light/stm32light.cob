@@ -29,6 +29,8 @@
     <Exclude path="C:\CooCox\CoIDE\workspace\libs\dht22.h"/>
     <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\usbserial.c"/>
     <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\usbserial.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\dht22.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\dht22.h"/>
   </ExcludedFiles>
   <Drivers/>
 </Project>
