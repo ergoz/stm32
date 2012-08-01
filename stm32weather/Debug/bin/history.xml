@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32weather.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32weather --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32weather\link.ld -g">
+      <target file="stm32weather.elf" lastModified="138e3d3c480">
+         <source file="..\obj\spi.o" lastModified="138d4110130"/>
+         <source file="..\obj\stm32f10x_tim.o" lastModified="138d4110234"/>
+         <source file="..\obj\core_cm3.o" lastModified="138d411028e"/>
+         <source file="..\obj\timer.o" lastModified="138d4110306"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="138d411036a"/>
+         <source file="..\obj\startup_stm32f10x_md.o" lastModified="138d41103ba"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="138d411043c"/>
+         <source file="..\obj\main.o" lastModified="138e3d3c3b8"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="138d4110522"/>
+         <source file="..\obj\stm32f10x_exti.o" lastModified="138d4110586"/>
+         <source file="..\obj\syscalls.o" lastModified="138d41105e0"/>
+         <source file="..\obj\exti.o" lastModified="138d4110658"/>
+         <source file="..\obj\queue.o" lastModified="138d41106c6"/>
+         <source file="..\obj\stm32f10x_dma.o" lastModified="138d411073e"/>
+         <source file="..\obj\dht22.o" lastModified="138d41107ac"/>
+         <source file="..\obj\misc.o" lastModified="138d4110810"/>
+         <source file="..\obj\stm32f10x_spi.o" lastModified="138d4110892"/>
+         <source file="..\obj\stm32f10x_i2c.o" lastModified="138d4110928"/>
+         <source file="..\obj\nrf.o" lastModified="138d41109be"/>
+         <source file="..\obj\irled.o" lastModified="138e3d2c844"/>
+      </target>
+   </processor>
+</history>
