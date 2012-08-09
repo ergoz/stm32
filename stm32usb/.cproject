@@ -27,7 +27,6 @@
 						<entry flags="" kind="includePath" name="C:/CooCox/CoIDE/workspace/STM32_USB-FS-Device_Driver/inc"/>
 						<entry flags="" kind="includePath" name="cmsis"/>
 						<entry flags="" kind="includePath" name="cmsis_boot"/>
-						<entry flags="" kind="includePath" name="semihosting"/>
 						<entry flags="" kind="includePath" name="STM32_USB-FS-Device_Driver/inc/"/>
 						<entry flags="" kind="includePath" name="stm_lib"/>
 						<entry flags="" kind="includePath" name="stm_lib/inc"/>
@@ -58,7 +57,6 @@
 				<pathentry include="C:/CooCox/CoIDE/workspace/STM32_USB-FS-Device_Driver/inc" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/cmsis" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/cmsis_boot" kind="inc" path="" system="true"/>
-				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/semihosting" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/STM32_USB-FS-Device_Driver/inc" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/stm_lib" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/stm_lib/inc" kind="inc" path="" system="true"/>
@@ -69,11 +67,11 @@
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/cmsis" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/cmsis_boot" kind="inc" path="" system="true"/>
-				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/semihosting" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/STM32_USB-FS-Device_Driver/inc" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/stm_lib" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/stm_lib/inc" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/USB" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32usb/semihosting" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32usb" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32usb/cmsis" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32usb/cmsis_boot" kind="inc" path="" system="true"/>

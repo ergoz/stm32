@@ -48,6 +48,8 @@
       <fileset dir="C:\CooCox\CoIDE\workspace\stm32\libs">
         <include name="**/*.c"/>
         <include name="**/*.s"/>
+        <exclude name="irled.c"/>
+        <exclude name="irled.h"/>
         <exclude name="led.c"/>
         <exclude name="led.h"/>
         <exclude name="light.c"/>
@@ -77,7 +79,6 @@
       <includepath path="C:\CooCox\CoIDE\workspace\STM32_USB-FS-Device_Driver\inc"/>
       <includepath path="C:\CooCox\CoIDE\workspace\STM32_USB-FS-Device_Driver"/>
       <includepath path="C:\CooCox\CoIDE\workspace\libs"/>
-      <includepath path="semihosting"/>
       <includepath path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB"/>
       <includepath path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc"/>
       <includepath path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver"/>

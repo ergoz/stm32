@@ -32,8 +32,8 @@
 void vDht22Init(void);
 void vDht22Start(void);
 uint8_t uDht22Measuring(void);
-uint32_t uDht22GetTemp(void);
-uint32_t uDht22GetHumidity(void);
+uint16_t uDht22GetTemp(void);
+uint16_t uDht22GetHumidity(void);
 uint8_t uDht22CheckCrc(void);
 
 #endif

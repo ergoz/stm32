@@ -64,6 +64,16 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>STM32_USB</name>
+			<type>2</type>
+			<location>C:/CooCox/CoIDE/workspace/stm32/STM32_USB</location>
+		</link>
+		<link>
+			<name>STM32_USB-FS-Device_Driver</name>
+			<type>2</type>
+			<location>C:/CooCox/CoIDE/workspace/stm32/STM32_USB-FS-Device_Driver</location>
+		</link>
+		<link>
 			<name>libs</name>
 			<type>2</type>
 			<location>C:/CooCox/CoIDE/workspace/stm32/libs</location>

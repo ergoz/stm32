@@ -27,8 +27,6 @@
     <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\light.h"/>
     <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\motion.c"/>
     <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\motion.h"/>
-    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\usbserial.c"/>
-    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\usbserial.h"/>
   </ExcludedFiles>
   <Drivers/>
 </Project>

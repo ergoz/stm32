@@ -37,8 +37,8 @@
 
 typedef union
 {
-	uint8_t		status;		// status to ASK command, 1 - success, 0 - failure
-	uint32_t	dht22[2];	// temp + humidity from dht22
+	uint32_t	ping;		// ping value
+	uint16_t	dht22[2];	// temp + humidity from dht22
 	uint32_t	pressure;	// pressure from Freescale
 	uint32_t	temp;		// temperature from max6635
 	uint8_t		ir[7];		// Samsung air conditioneer command
@@ -46,7 +46,9 @@ typedef union
 
 typedef struct
 {
-	uint8_t		cmd;
+	uint8_t		sender[5];	// packet from
+	uint8_t		cmd;		// command
+	uint8_t		status;		// status to ASK command, 1 - success, 0 - failure
 	packet_data	data;
 } Packet_t, *pPacket_t;
 

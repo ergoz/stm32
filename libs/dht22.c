@@ -63,7 +63,7 @@ void vDht22Init(void)
 	vExtiAddCb(GPIO_PortSourceGPIOA, GPIO_PinSource15, vDhtCbState);
 
 	GPIO_InitStructure.GPIO_Pin = DHT22_PIN;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_Init(DHT22_GPIO, &GPIO_InitStructure);
 }
@@ -113,7 +113,7 @@ void vDht22Start(void)
 
     // configure pin
 	GPIO_InitStructure.GPIO_Pin = DHT22_PIN;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_Init(DHT22_GPIO, &GPIO_InitStructure);
 
@@ -124,7 +124,7 @@ void vDht22Start(void)
 
 	// switch to input
 	GPIO_InitStructure.GPIO_Pin = DHT22_PIN;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_Init(DHT22_GPIO, &GPIO_InitStructure);
 
@@ -137,18 +137,18 @@ uint8_t uDht22Measuring(void)
 	return g_DhtMeasuring;
 }
 
-uint32_t uDht22GetTemp(void)
+uint16_t uDht22GetTemp(void)
 {
-	uint32_t res=0;
+	uint16_t res=0;
 	res=g_DhtRaw[2];
 	res<<=8;
 	res|=g_DhtRaw[3];
 	return res;
 }
 
-uint32_t uDht22GetHumidity(void)
+uint16_t uDht22GetHumidity(void)
 {
-	uint32_t res=0;
+	uint16_t res=0;
 	res=g_DhtRaw[0];
 	res<<=8;
 	res|=g_DhtRaw[1];

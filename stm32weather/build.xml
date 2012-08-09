@@ -25,7 +25,7 @@
       <arg value="${project.name}.elf"/>
     </exec>
   </target>
-
+  
   <taskdef resource="cpptasks.tasks"/>
   <target name="compile">
     <mkdir dir="${project.bin}"/>
@@ -34,6 +34,14 @@
       <!-- compile all the c source file in the project -->
       
       <fileset dir=".">
+        <include name="**/*.c"/>
+        <include name="**/*.s"/>
+      </fileset>
+      <fileset dir="C:\CooCox\CoIDE\workspace\stm32\STM32_USB">
+        <include name="**/*.c"/>
+        <include name="**/*.s"/>
+      </fileset>
+      <fileset dir="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver">
         <include name="**/*.c"/>
         <include name="**/*.s"/>
       </fileset>
@@ -46,8 +54,6 @@
         <exclude name="light.h"/>
         <exclude name="motion.c"/>
         <exclude name="motion.h"/>
-        <exclude name="usbserial.c"/>
-        <exclude name="usbserial.h"/>
       </fileset>
       <project outfile="${project.name}.elf" overwrite="true" type="xcode"/>
       
@@ -65,6 +71,9 @@
       <includepath path="cmsis_boot"/>
       <includepath path="stm_lib"/>
       <includepath path="stm_lib/inc"/>
+      <includepath path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB"/>
+      <includepath path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc"/>
+      <includepath path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver"/>
       <includepath path="C:\CooCox\CoIDE\workspace\stm32\libs"/>
       
       <!-- arm-none-eabi-gcc compiler arguments -->

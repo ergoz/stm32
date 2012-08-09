@@ -6,8 +6,6 @@
   </Device>
   <Components>
     <Component id="c37a9351-96ed-11df-80ae-001d7d723e56" name="C Library"/>
-    <Component id="c37f2731-96ed-11df-80ae-001d7d723e56" name="Retarget printf"/>
-    <Component id="49305350-fa01-11e0-ac6f-001d0f27e54d" name="Semihosting"/>
     <Component id="bf7c3c91-96ed-11df-80ae-001d7d723e56" name="CMSIS core"/>
     <Component id="bfa102a1-96ed-11df-80ae-001d7d723e56" name="RCC"/>
     <Component id="bfe42621-96ed-11df-80ae-001d7d723e56" name="GPIO"/>
@@ -29,6 +27,8 @@
     <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\light.h"/>
     <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\motion.c"/>
     <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\motion.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\irled.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\irled.h"/>
   </ExcludedFiles>
   <Drivers/>
 </Project>

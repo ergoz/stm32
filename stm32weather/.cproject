@@ -18,6 +18,9 @@
 						<entry flags="" kind="includePath" name="C:\Program Files (x86)\arm-none-eabi-gcc-4_6\lib\gcc\arm-none-eabi\4.6.2\include-fixed"/>
 						<entry flags="" kind="includePath" name="."/>
 						<entry flags="" kind="includePath" name="C:/CooCox/CoIDE/workspace/stm32/libs"/>
+						<entry flags="" kind="includePath" name="C:/CooCox/CoIDE/workspace/stm32/STM32_USB"/>
+						<entry flags="" kind="includePath" name="C:/CooCox/CoIDE/workspace/stm32/STM32_USB-FS-Device_Driver"/>
+						<entry flags="" kind="includePath" name="C:/CooCox/CoIDE/workspace/stm32/STM32_USB-FS-Device_Driver/inc"/>
 						<entry flags="" kind="includePath" name="cmsis"/>
 						<entry flags="" kind="includePath" name="cmsis_boot"/>
 						<entry flags="" kind="includePath" name="stm_lib"/>
@@ -39,6 +42,9 @@
 				<pathentry include="C:/Program Files (x86)/arm-none-eabi-gcc-4_6/lib/gcc/arm-none-eabi/4.6.2/include-fixed" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/libs" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/STM32_USB" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/STM32_USB-FS-Device_Driver" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/STM32_USB-FS-Device_Driver/inc" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/cmsis" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/cmsis_boot" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/stm_lib" kind="inc" path="" system="true"/>
@@ -51,6 +57,9 @@
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/cmsis_boot" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/stm_lib" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/stm_lib/inc" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/semihosting" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/STM32_USB-FS-Device_Driver/inc" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/USB" kind="inc" path="" system="true"/>
 				<pathentry kind="mac" name="__GNUC__" path="" value=""/>
 				<pathentry kind="mac" name="STM32F10X_MD" path="" value=""/>
 				<pathentry kind="mac" name="USE_STDPERIPH_DRIVER" path="" value=""/>
