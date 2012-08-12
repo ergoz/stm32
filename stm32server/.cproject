@@ -67,6 +67,8 @@
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32server/semihosting" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32server/stm_lib" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32server/stm_lib/inc" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32server/STM32_USB-FS-Device_Driver/inc" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32server/USB" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32server" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32server/cmsis" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32server/cmsis_boot" kind="inc" path="" system="true"/>

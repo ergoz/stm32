@@ -3,22 +3,16 @@
 #include "stm32f10x_rcc.h"
 #include "misc.h"
 #include "nrf.h"
+#include "dht22.h"
 #include "exti.h"
 #include "timer.h"
 #include "usbserial.h"
 #include "queue.h"
 #include "nRF24L01.h"
+#include "packet.h"
+#include "common.h"
 
-char* myitoa(int val, int base)
-{
-	static char buf[32];
-
-	memset(buf, 0, 32);
-	int i = 30;
-	for(; val && i ; --i, val /= base)
-		buf[i] = "0123456789ABCDEF"[val % base];
-	return &buf[i+1];
-}
+#define NRF_OWN_ADDR	"serv1"
 
 void vMainNrfDump(void)
 {
@@ -56,36 +50,190 @@ void InitAll(void)
 	vTimerInit();
 	vExtiInit();
 	vNrfHwInit();
-	vNrfInit(1, (uint8_t *)"serv1");
+	vNrfInit(1, (uint8_t *)NRF_OWN_ADDR);
+	vDht22Init();
 	// this should be latest to let all other modules init EXTI
 	vExtiStart();
 }
 
+void NrfPacketTest(uint8_t *target, uint32_t count)
+{
+	uint32_t lost, t, k, total;
+	uint8_t payload_size;
+	uint8_t name[6];
+	Packet_t pkt;
+
+	memset(name, 0, 6);
+	memcpy(name, target, 5);
+	total=0;
+
+	if (count==1)
+		vUsbserialWrite("Ping: ");
+	else
+		vUsbserialWrite("Packet test with node: ");
+	vUsbserialWrite(name);
+	vUsbserialWrite("\r\n");
+	vUsbserialWrite("Begin: ");
+	lost = 0;
+	for (k = 0; k < count; k++)
+	{
+		pkt.cmd=PACKET_PING;
+		memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+		t = uTimerGetMs();
+		pkt.data.ping = t;
+
+		vNrfSend((uint8_t *) name, (uint8_t *) &pkt, sizeof(Packet_t));
+
+		while (uNrfIsSending()) {};
+
+		while ((uTimerGetMs() - t) < 100)
+		{
+			if (!uNrfIsSending() && uNrfIsPayloadReceived())
+			{
+				payload_size = uNrfGetPayloadSize();
+				if (payload_size==sizeof(Packet_t))
+					uNrfGetPayload((uint8_t *) &pkt, sizeof(Packet_t));
+
+				memcpy(&t, &pkt.data.ping, 4);
+				t = uTimerGetMs() - t;
+				total+=t;
+
+				vUsbserialWrite(".");
+				if (count==1)
+				{
+					vUsbserialWrite("response: ");
+					if (!t)
+						vUsbserialWrite("0");
+					else
+						vUsbserialWrite(myitoa(t, 10));
+					vUsbserialWrite(" ms\r\n");
+				}
+				t = 0;
+				break;
+			}
+		}
+		if (t)
+		{
+			if (count==1)
+				vUsbserialWrite(" lost!\r\n");
+			else
+				vUsbserialWrite("X");
+			lost++;
+		}
+		//vTimerDelayMs(1);
+	}
+	if (count!=1)
+	{
+		vUsbserialWrite("End\r\nTotal lost packets: ");
+		if (!lost)
+			vUsbserialWrite("0");
+		else
+			vUsbserialWrite(myitoa(lost, 10));
+		vUsbserialWrite("\r\n");
+
+		vUsbserialWrite("Average response time: ");
+		if (!total)
+			vUsbserialWrite("0");
+		else
+			vUsbserialWrite(myitoa(total/count, 10));
+		vUsbserialWrite("\r\n");
+
+	}
+}
+
+void vSendIr(uint8_t *addr, uint8_t *buf)
+{
+	Packet_t pkt;
+	uint8_t cnt;
+	uint8_t ir[7];
+	int32_t i;
+
+	for (cnt=0; cnt<7; cnt++)
+	{
+		pkt.data.ir[cnt]=(uint8_t)myatoi(buf+cnt*2, 2);
+	}
+
+	pkt.cmd=PACKET_AIR;
+
+	memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+	vNrfSend(addr, (uint8_t *) &pkt, sizeof(Packet_t));
+}
+
+
+void vDhtSend(uint8_t *addr)
+{
+	Packet_t pkt;
+
+	pkt.cmd=PACKET_DHT22;
+	memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+	vNrfSend(addr, (uint8_t *) &pkt, sizeof(Packet_t));
+}
+
 uint8_t handle_cmd(uint8_t *buf)
 {
+	uint8_t *p;
+
 	if (strlen((const char *) buf) > 5 &&
 			memcmp((const char *) buf, (const char *) "status", 6) == 0)
 	{
 		vMainNrfDump();
 		return 1;
 	}
+
+	if (strlen((const char *)buf)>9 &&
+			memcmp((const char *)buf, (const char *)"test", 4)==0)
+	{
+		NrfPacketTest(&buf[5], 500);
+		return 1;
+	}
+
+	if (strlen((const char *)buf)>9 &&
+			memcmp((const char *)buf, (const char *)"ping", 4)==0)
+	{
+		NrfPacketTest(&buf[5], 1);
+		return 1;
+	}
+
+	if (strlen((const char *)buf)>10 &&
+			memcmp((const char *)buf, (const char *)"send", 4)==0)
+	{
+		p=buf+5;
+		buf+=11;
+
+		if (strlen((const char *)buf)>4 &&
+				memcmp((const char *)buf, (const char *)"dht22", 5)==0)
+		{
+			vDhtSend(p);
+			return 1;
+		}
+
+		if (strlen((const char *)buf)>17 &&
+				memcmp((const char *)buf, (const char *)"air", 3)==0)
+		{
+			vSendIr(p, buf+4);
+			return 1;
+		}
+	}
+
 	return 0;
 }
 
+//extern volatile uint32_t pkt_cnt;
 
 int main(void)
 {
-	uint32_t j, t;
+	uint32_t j;
 	uint8_t state=1;
-	uint8_t buf[256];
+	uint8_t buf[256], name[6];
 	uint8_t payload_size;
+	Packet_t pkt;
 
 	memset(buf, 0, 256);
 
 	InitAll();
 	//vMainNrfDump();
 
-	GPIO_SetBits(GPIOB, GPIO_Pin_1);
+	//GPIO_SetBits(GPIOB, GPIO_Pin_1);
 
 	j = 0;
 	while (1)
@@ -96,9 +244,9 @@ int main(void)
 			if (buf[j-1]=='\r')		// this is wrong!!! need to scan whole string
 			{
 				buf[j-1]=0;
-				vUsbserialWrite("Got: ");
-				vUsbserialWrite((char *)buf);
-				vUsbserialWrite("\r\n");
+//				vUsbserialWrite("Command: ");
+//				vUsbserialWrite((char *)buf);
+//				vUsbserialWrite("\r\n");
 				j=0;
 
 				state=!state;
@@ -107,28 +255,65 @@ int main(void)
 				else
 					GPIO_ResetBits(GPIOB, GPIO_Pin_1);
 
-				handle_cmd(buf);
+				if (!handle_cmd(buf))
+					vUsbserialWrite("Unknown command...\r\n");
 
 				memset(buf, 0, 256);
 			}
 		}
 
 		if (!uNrfIsSending() && uNrfIsPayloadReceived())
-        {
-			vUsbserialWrite("Got ping request...");
+		{
 			payload_size = uNrfGetPayloadSize();
-			if (payload_size==4)
-				uNrfGetPayload((uint8_t *)&t, 4);
+			if (payload_size==sizeof(Packet_t))
+				uNrfGetPayload((uint8_t *)&pkt, sizeof(Packet_t));
 
-			vNrfSend((uint8_t *)"main1", (uint8_t *)&t, 4);
-			while (uNrfIsSending()){};
+			vUsbserialWrite("Received packet from: ");
+			memset(name, 0, 6);
+			memcpy(name, pkt.sender, 5);
+			vUsbserialWrite(name);
+			vUsbserialWrite("\r\n");
 
-			vUsbserialWrite("reply send!\r\n");
-			state=!state;
-			if (state)
-				GPIO_SetBits(GPIOB, GPIO_Pin_1);
-			else
-				GPIO_ResetBits(GPIOB, GPIO_Pin_1);
-        }
+			if ((pkt.cmd&PACKET_REPLY)==PACKET_REPLY)
+			{
+				switch (pkt.cmd&PACKET_CMD_MASK)
+				{
+				case PACKET_DHT22:
+				{
+					if (pkt.status==1)
+					{
+						vUsbserialWrite("Temp: ");
+						vUsbserialWrite(myitoa(pkt.data.dht22[0] / 10, 10));
+						vUsbserialWrite(".");
+						if (pkt.data.dht22[0] % 10 != 0)
+							vUsbserialWrite(myitoa(pkt.data.dht22[0] % 10, 10));
+						else
+							vUsbserialWrite("0");
+						vUsbserialWrite("\r\n");
+
+						vUsbserialWrite("Humidity: ");
+						vUsbserialWrite(myitoa(pkt.data.dht22[1] / 10, 10));
+						vUsbserialWrite(".");
+						if (pkt.data.dht22[1] % 10 != 0)
+							vUsbserialWrite(myitoa(pkt.data.dht22[1] % 10, 10));
+						else
+							vUsbserialWrite("0");
+						vUsbserialWrite("\r\n");
+					}
+					else
+						vUsbserialWrite("DHT22 measuring failed!\r\n");
+					break;
+				}
+				default:
+				{
+					vUsbserialWrite("Packet type: ");
+					vUsbserialWrite(myitoa(pkt.cmd, 10));
+					vUsbserialWrite("\r\n");
+					break;
+				}
+				}
+
+			}
+		}
 	}
 }
