@@ -3,7 +3,7 @@
 #include "stm32f10x_rcc.h"
 #include "misc.h"
 #include "nrf.h"
-#include "dht22.h"
+//#include "dht22.h"
 #include "exti.h"
 #include "timer.h"
 #include "usbserial.h"
@@ -50,8 +50,8 @@ void InitAll(void)
 	vTimerInit();
 	vExtiInit();
 	vNrfHwInit();
-	vNrfInit(1, (uint8_t *)NRF_OWN_ADDR);
-	vDht22Init();
+	vNrfInit(0, (uint8_t *)NRF_OWN_ADDR);
+	//vDht22Init();
 	// this should be latest to let all other modules init EXTI
 	vExtiStart();
 }
@@ -145,8 +145,8 @@ void vSendIr(uint8_t *buf)
 {
 	Packet_t pkt;
 	uint8_t cnt;
-	uint8_t ir[7];
-	int32_t i;
+//	uint8_t ir[7];
+//	int32_t i;
 
 	for (cnt=0; cnt<7; cnt++)
 	{

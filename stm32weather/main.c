@@ -2,6 +2,7 @@
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_rcc.h"
 #include "stm32f10x_tim.h"
+#include "stm32f10x_iwdg.h"
 #include "misc.h"
 #include "nrf.h"
 #include "dht22.h"
@@ -17,11 +18,31 @@
 
 #define NRF_OWN_ADDR	"temp1"
 
-static volatile g_MainStartDht=0;
+static volatile uint8_t g_MainStartDht=0;
 
 void vMainTim4Cb(void)
 {
 	g_MainStartDht=1;
+}
+
+void vMainIWDGInit(void)
+{
+    /* IWDG timeout equal to 350ms (the timeout may varies due to LSI frequency
+     dispersion) -------------------------------------------------------------*/
+    /* Enable write access to IWDG_PR and IWDG_RLR registers */
+    IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
+
+    /* IWDG counter clock: 32KHz(LSI) / 256 = 1KHz */
+    IWDG_SetPrescaler(IWDG_Prescaler_256);
+
+    /* Set counter reload value to 1563 */
+    IWDG_SetReload(1563);
+
+    /* Reload IWDG counter */
+    IWDG_ReloadCounter();
+
+    /* Enable IWDG (the LSI oscillator will be enabled by hardware) */
+    IWDG_Enable();
 }
 
 void InitAll(void)
@@ -41,12 +62,13 @@ void InitAll(void)
 	vTimerInit();
 	vExtiInit();
 	vNrfHwInit();
-	vNrfInit(1, (uint8_t *)NRF_OWN_ADDR);
+	vNrfInit(0, (uint8_t *)NRF_OWN_ADDR);
 	vDht22Init();
 	vIrledInit();
 
 	vTim4Init(60000, 12000);
 	vTim4SetCb(&vMainTim4Cb);
+	vMainIWDGInit();
 
 	// this should be latest to let all other modules init EXTI
 	vExtiStart();
@@ -76,20 +98,22 @@ static uint8_t g_dht_status=0;
 
 void vMainDhtMeasure(void)
 {
-		vDht22Start();
-		while (uDht22Measuring()){};
+	uint32_t cnt;
 
-		if (uDht22CheckCrc())
-		{
-			g_dht1=uDht22GetTemp();
-			g_dht2=uDht22GetHumidity();
-			g_dht_status=1;
+	vDht22Start();
+	cnt=0xffffffff;
+	while (uDht22Measuring() && cnt>0)
+		cnt--;
 
-			//vDhtTest();
-		}
-		else
-			g_dht_status=0;
+	if (cnt>0 && uDht22CheckCrc())
+	{
+		g_dht1 = uDht22GetTemp();
+		g_dht2 = uDht22GetHumidity();
+		g_dht_status = 1;
 
+		//vDhtTest();
+	} else
+		g_dht_status = 0;
 }
 
 
@@ -115,7 +139,7 @@ void vDhtTest(void)
 
 uint8_t handle_cmd(uint8_t *buf)
 {
-	uint8_t cnt;
+//	uint8_t cnt;
 
 	if (strlen((const char *) buf) > 5 &&
 			memcmp((const char *) buf, (const char *) "status", 6) == 0)
@@ -139,8 +163,8 @@ int main(void)
 	Packet_t pkt;
 	uint8_t payload_size;
 	uint8_t sender[5];
-	const uint8_t cmd[]={0x80, 0x4d, 0x75, 0x8f, 0xce, 0x88, 0xf};
-	volatile uint8_t buf[256];
+	//const uint8_t cmd[]={0x80, 0x4d, 0x75, 0x8f, 0xce, 0x88, 0xf};
+	uint8_t buf[256];
 	uint32_t j=0;
 	uint8_t state=1;
 
@@ -150,6 +174,7 @@ int main(void)
 
 	while(1)
     {
+		IWDG_ReloadCounter();
 
 		if (g_MainStartDht)
 		{
@@ -195,32 +220,34 @@ int main(void)
 				memcpy(pkt.sender, NRF_OWN_ADDR, 5);
 				pkt.cmd|=PACKET_REPLY;
 
-				switch(GET_PACKET_CMD(pkt.cmd))
+				switch (GET_PACKET_CMD(pkt.cmd))
 				{
-				case PACKET_PING:
-				{
-					vIrledSend(cmd, sizeof(cmd)*8);
-					pkt.status=1;
-					vNrfSend((uint8_t *) sender, (uint8_t *) &pkt, sizeof(Packet_t));
-					break;
-				}
-				case PACKET_AIR:
-				{
-					vIrledSend(pkt.data.ir, sizeof(pkt.data.ir)*8);
-					pkt.status=1;
-					vNrfSend((uint8_t *) sender, (uint8_t *) &pkt, sizeof(Packet_t));
-					break;
-				}
-				case PACKET_DHT22:
-				{
-					pkt.status=g_dht_status;
-					pkt.data.dht22[0]=g_dht1;
-					pkt.data.dht22[1]=g_dht2;
-
-					vNrfSend((uint8_t *) sender, (uint8_t *) &pkt, sizeof(Packet_t));
-					break;
-				}
+					case PACKET_PING:
+					{
+						//vIrledSend(cmd, sizeof(cmd)*8);
+						pkt.status = 1;
+						break;
+					}
+					case PACKET_AIR:
+					{
+						vIrledSend(pkt.data.ir, sizeof(pkt.data.ir) * 8);
+						pkt.status = 1;
+						break;
+					}
+					case PACKET_DHT22:
+					{
+						pkt.status = g_dht_status;
+						pkt.data.dht22[0] = g_dht1;
+						pkt.data.dht22[1] = g_dht2;
+						break;
+					}
+					default:
+					{
+						pkt.status = 0;
+						break;
+					}
 				};
+				vNrfSend((uint8_t *) sender, (uint8_t *) &pkt, sizeof(Packet_t));
 			}
 		}
     }

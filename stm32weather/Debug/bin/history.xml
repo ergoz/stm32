@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32weather.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32weather --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32weather\link.ld -g">
-      <target file="stm32weather.elf" lastModified="1390c8ec3b4">
+      <target file="stm32weather.elf" lastModified="13921371345">
          <source file="..\obj\otgd_fs_pcd.o" lastModified="13902af2b4b"/>
          <source file="..\obj\usb_core.o" lastModified="13902af2bf7"/>
          <source file="..\obj\spi.o" lastModified="13902af2c55"/>
@@ -12,14 +12,14 @@
          <source file="..\obj\system_stm32f10x.o" lastModified="13902af2f03"/>
          <source file="..\obj\usb_desc.o" lastModified="13902af2f51"/>
          <source file="..\obj\usb_regs.o" lastModified="13902af2ffd"/>
-         <source file="..\obj\common.o" lastModified="13907ab8a31"/>
+         <source file="..\obj\common.o" lastModified="13920c9ee98"/>
          <source file="..\obj\startup_stm32f10x_md.o" lastModified="13902af303b"/>
          <source file="..\obj\hw_config.o" lastModified="13902af30a8"/>
          <source file="..\obj\stm32f10x_gpio.o" lastModified="13902af3144"/>
          <source file="..\obj\usb_prop.o" lastModified="13902af31b1"/>
          <source file="..\obj\usb_pwr.o" lastModified="13902af321f"/>
          <source file="..\obj\usb_init.o" lastModified="13902af326d"/>
-         <source file="..\obj\main.o" lastModified="1390c8ec2ca"/>
+         <source file="..\obj\main.o" lastModified="13921371254"/>
          <source file="..\obj\otgd_fs_dev.o" lastModified="13902af3395"/>
          <source file="..\obj\stm32f10x_rcc.o" lastModified="13902af3412"/>
          <source file="..\obj\stm32f10x_exti.o" lastModified="13902af3470"/>
@@ -41,6 +41,7 @@
          <source file="..\obj\nrf.o" lastModified="13902af3ad6"/>
          <source file="..\obj\usb_istr.o" lastModified="13902af3b62"/>
          <source file="..\obj\irled.o" lastModified="13902af3bdf"/>
+         <source file="..\obj\stm32f10x_iwdg.o" lastModified="13920d9bd94"/>
       </target>
    </processor>
 </history>

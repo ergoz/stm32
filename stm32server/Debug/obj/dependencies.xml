@@ -215,6 +215,9 @@
       <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_core.c" lastModified="12ecc885c60">
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
       </source>
+      <source file="..\..\stm_lib\src\stm32f10x_iwdg.c" lastModified="13920e05c8a">
+         <include file="..\..\stm_lib\inc\stm32f10x_iwdg.h"/>
+      </source>
       <source file="..\..\cmsis_boot\system_stm32f10x.c" lastModified="1383968bc7d">
          <include file="..\..\cmsis_boot\stm32f10x.h"/>
       </source>
@@ -229,6 +232,9 @@
          <include file="..\..\stm_lib\inc\stm32f10x_spi.h"/>
          <include file="..\..\stm_lib\inc\stm32f10x_dma.h"/>
          <include file="..\..\stm_lib\inc\misc.h"/>
+      </source>
+      <source file="..\..\stm_lib\inc\stm32f10x_iwdg.h" lastModified="13920e05c88">
+         <include file="..\..\cmsis_boot\stm32f10x.h"/>
       </source>
       <source file="..\..\cmsis_boot\stm32f10x_conf.h" lastModified="1383968bc6d">
       </source>

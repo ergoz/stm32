@@ -4,6 +4,9 @@
       <target file="stm32f10x_exti.o" lastModified="1386378d173">
          <source file="..\..\stm_lib\src\stm32f10x_exti.c" lastModified="1383968d7ba"/>
       </target>
+      <target file="stm32f10x_iwdg.o" lastModified="13920e1cd07">
+         <source file="..\..\stm_lib\src\stm32f10x_iwdg.c" lastModified="13920e05c8a"/>
+      </target>
       <target file="syscalls.o" lastModified="1386378d33d">
          <source file="..\..\syscalls\syscalls.c" lastModified="1383968a832"/>
       </target>
@@ -112,8 +115,8 @@
       <target file="otgd_fs_cal.o" lastModified="1386378d385">
          <source file="..\..\..\STM32_USB-FS-Device_Driver\src\otgd_fs_cal.c" lastModified="12ecc885c60"/>
       </target>
-      <target file="main.o" lastModified="1391c482de8">
-         <source file="..\..\main.c" lastModified="1391c482528"/>
+      <target file="main.o" lastModified="13921355b64">
+         <source file="..\..\main.c" lastModified="139213522d5"/>
       </target>
       <target file="semihosting.o" lastModified="1386378c706">
          <source file="..\..\semihosting\semihosting.c" lastModified="1383968afff"/>

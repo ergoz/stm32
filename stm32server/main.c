@@ -1,9 +1,10 @@
 #include "stm32f10x.h"
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_rcc.h"
+#include "stm32f10x_iwdg.h"
 #include "misc.h"
 #include "nrf.h"
-#include "dht22.h"
+//#include "dht22.h"
 #include "exti.h"
 #include "timer.h"
 #include "usbserial.h"
@@ -33,6 +34,27 @@ void vMainNrfDump(void)
 	vUsbserialWrite("\r\n");
 }
 
+void vMainIWDGInit(void)
+{
+    /* IWDG timeout equal to 350ms (the timeout may varies due to LSI frequency
+     dispersion) -------------------------------------------------------------*/
+    /* Enable write access to IWDG_PR and IWDG_RLR registers */
+    IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
+
+    /* IWDG counter clock: 32KHz(LSI) / 256 = 1KHz */
+    IWDG_SetPrescaler(IWDG_Prescaler_256);
+
+    /* Set counter reload value to 1563 */
+    IWDG_SetReload(1563);
+
+    /* Reload IWDG counter */
+    IWDG_ReloadCounter();
+
+    /* Enable IWDG (the LSI oscillator will be enabled by hardware) */
+    IWDG_Enable();
+}
+
+
 void InitAll(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -50,8 +72,10 @@ void InitAll(void)
 	vTimerInit();
 	vExtiInit();
 	vNrfHwInit();
-	vNrfInit(1, (uint8_t *)NRF_OWN_ADDR);
-	vDht22Init();
+	vNrfInit(0, (uint8_t *)NRF_OWN_ADDR);
+//	vDht22Init();
+	vMainIWDGInit();
+
 	// this should be latest to let all other modules init EXTI
 	vExtiStart();
 }
@@ -145,8 +169,8 @@ void vSendIr(uint8_t *addr, uint8_t *buf)
 {
 	Packet_t pkt;
 	uint8_t cnt;
-	uint8_t ir[7];
-	int32_t i;
+//	uint8_t ir[7];
+//	int32_t i;
 
 	for (cnt=0; cnt<7; cnt++)
 	{
@@ -238,6 +262,7 @@ int main(void)
 	j = 0;
 	while (1)
 	{
+		IWDG_ReloadCounter();
 		if (uUsbSerialDataAvailable())
 		{
 			j += uUsbSerialRead(&buf[j], 256 - j);
@@ -307,8 +332,13 @@ int main(void)
 				default:
 				{
 					vUsbserialWrite("Packet type: ");
-					vUsbserialWrite(myitoa(pkt.cmd, 10));
+					vUsbserialWrite(myitoa(pkt.cmd&PACKET_CMD_MASK, 10));
 					vUsbserialWrite("\r\n");
+					vUsbserialWrite("Status: ");
+					if (pkt.status==1)
+						vUsbserialWrite("Ok\r\n");
+					else
+						vUsbserialWrite("Failed\r\n");
 					break;
 				}
 				}

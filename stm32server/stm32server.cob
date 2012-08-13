@@ -14,6 +14,7 @@
     <Component id="bfe42621-96ed-11df-80ae-001d7d723e56" name="GPIO"/>
     <Component id="bff208d1-96ed-11df-80ae-001d7d723e56" name="EXTI"/>
     <Component id="bff9a9f1-96ed-11df-80ae-001d7d723e56" name="DMA"/>
+    <Component id="c0152131-96ed-11df-80ae-001d7d723e56" name="IWDG"/>
     <Component id="c0446e91-96ed-11df-80ae-001d7d723e56" name="SPI"/>
     <Component id="c04d9651-96ed-11df-80ae-001d7d723e56" name="I2C"/>
     <Component id="c064a0c1-96ed-11df-80ae-001d7d723e56" name="TIM"/>
