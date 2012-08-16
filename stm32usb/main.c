@@ -172,6 +172,13 @@ void vSendIr(uint8_t *buf)
 	vNrfSend((uint8_t *) "temp1", (uint8_t *) &pkt, sizeof(Packet_t));
 }
 
+void vLuxTest(void)
+{
+	Packet_t pkt;
+	pkt.cmd=PACKET_LUX;
+	memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+	vNrfSend((uint8_t *) "litt1", (uint8_t *) &pkt, sizeof(Packet_t));
+}
 
 void vDhtTest(void)
 {
@@ -209,6 +216,13 @@ uint8_t handle_cmd(uint8_t *buf)
 			memcmp((const char *)buf, (const char *)"dht22", 5)==0)
 	{
 		vDhtTest();
+		return 1;
+	}
+
+	if (strlen((const char *)buf)>2 &&
+			memcmp((const char *)buf, (const char *)"lux", 3)==0)
+	{
+		vLuxTest();
 		return 1;
 	}
 
@@ -300,6 +314,13 @@ int main(void)
 					}
 					else
 						vUsbserialWrite("DHT22 measuring failed!\r\n");
+					break;
+				}
+				case PACKET_LUX:
+				{
+					vUsbserialWrite("Lux: ");
+					vUsbserialWrite(myitoa(pkt.data.lux, 10));
+					vUsbserialWrite("\r\n");
 					break;
 				}
 				default:

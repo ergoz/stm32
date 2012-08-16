@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32usb.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32usb --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32usb\link.ld -g">
-      <target file="stm32usb.elf" lastModified="139215fb9ec">
+      <target file="stm32usb.elf" lastModified="13931000f04">
          <source file="..\obj\otgd_fs_pcd.o" lastModified="1390ca2f119"/>
          <source file="..\obj\usb_core.o" lastModified="1390ca2f1cd"/>
          <source file="..\obj\spi.o" lastModified="1390ca2f23b"/>
@@ -19,7 +19,7 @@
          <source file="..\obj\usb_prop.o" lastModified="1390ca2f85e"/>
          <source file="..\obj\usb_pwr.o" lastModified="1390ca2f8b8"/>
          <source file="..\obj\usb_init.o" lastModified="1390ca2f912"/>
-         <source file="..\obj\main.o" lastModified="139215fb882"/>
+         <source file="..\obj\main.o" lastModified="13931000d47"/>
          <source file="..\obj\otgd_fs_dev.o" lastModified="1390ca2fa2a"/>
          <source file="..\obj\stm32f10x_rcc.o" lastModified="1390ca2fae6"/>
          <source file="..\obj\stm32f10x_exti.o" lastModified="1390ca2fb54"/>

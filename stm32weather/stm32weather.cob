@@ -28,6 +28,44 @@
     <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\light.h"/>
     <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\motion.c"/>
     <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\motion.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\hw_config.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\hw_config.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\usb_conf.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\usb_desc.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\usb_desc.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\usb_endp.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\usb_istr.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\usb_istr.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\usb_prop.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\usb_prop.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\usb_pwr.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB\usb_pwr.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\otgd_fs_cal.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\otgd_fs_dev.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\otgd_fs_int.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\otgd_fs_pcd.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\otgd_fs_regs.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\usb_core.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\usb_def.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\usb_init.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\usb_int.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\usb_mem.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\usb_regs.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\usb_sil.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\inc\usb_type.h"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\src\otgd_fs_cal.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\src\otgd_fs_dev.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\src\otgd_fs_int.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\src\otgd_fs_pcd.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\src\usb_core.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\src\usb_init.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\src\usb_int.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\src\usb_mem.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\src\usb_regs.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver\src\usb_sil.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\usbserial.c"/>
+    <Exclude path="C:\CooCox\CoIDE\workspace\stm32\libs\usbserial.h"/>
   </ExcludedFiles>
   <Drivers/>
 </Project>

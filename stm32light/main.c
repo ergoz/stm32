@@ -11,6 +11,10 @@
 #include "usbserial.h"
 #include "queue.h"
 #include "nRF24L01.h"
+#include "packet.h"
+
+#define NRF_OWN_ADDR	"litt1"
+
 
 // global vars
 
@@ -72,7 +76,7 @@ void InitAll(void) {
 	vLightCbState(vLtCbState);
 
 	vNrfHwInit();
-	vNrfInit(1, (uint8_t *) "litt1");
+	vNrfInit(0, (uint8_t *)NRF_OWN_ADDR);
 	// this should be latest to let all other modules init EXTI
 	vExtiStart();
 }
@@ -82,15 +86,17 @@ int main(void) {
 	ExtiLineState_t currentButton = LineState_High;
 	ExtiLineState_t currentLight = LineState_High;
 
-	uint32_t t=0;
-	uint8_t state = 1;
+//	uint8_t state = 1;
 	uint8_t payload_size;
 	uint8_t val=0;
 
-	uint8_t buf[32];
+//	uint8_t buf[32];
 
 	uint32_t timeMs=0, lastTime=0, lastBtnTime=0;
 	int32_t motionEnabled=0, ledActive=0;
+
+	Packet_t pkt;
+	uint8_t sender[5];
 
 
 	InitAll();
@@ -119,19 +125,34 @@ int main(void) {
 		if (!uNrfIsSending() && uNrfIsPayloadReceived())
 		{
 			payload_size = uNrfGetPayloadSize();
-			if (payload_size == 32)
-				uNrfGetPayload((uint8_t *) buf, 32);
+			if (payload_size==sizeof(Packet_t))
+			{
+				uNrfGetPayload((uint8_t *)&pkt, sizeof(Packet_t));
+				memcpy(sender, pkt.sender, 5);
+				memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+				pkt.cmd|=PACKET_REPLY;
 
-			t=uLightReadLux();
-			memcpy(buf+4, &t, 4);
-			vNrfSend((uint8_t *) "main1", (uint8_t *) buf, 32);
-			while (uNrfIsSending()) {};
-
-			state = !state;
-			if (state)
-				GPIO_SetBits(GPIOB, GPIO_Pin_1);
-			else
-				GPIO_ResetBits(GPIOB, GPIO_Pin_1);
+				switch (GET_PACKET_CMD(pkt.cmd))
+				{
+					case PACKET_PING:
+					{
+						pkt.status = 1;
+						break;
+					}
+					case PACKET_LUX:
+					{
+						pkt.data.lux=uLightReadLux();
+						pkt.status = 1;
+						break;
+					}
+					default:
+					{
+						pkt.status = 0;
+						break;
+					}
+				};
+				vNrfSend((uint8_t *) sender, (uint8_t *) &pkt, sizeof(Packet_t));
+			}
 		}
 
 		if (currentLight == LineState_Low) // light is triggered

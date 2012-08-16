@@ -12,7 +12,7 @@
 #include "nRF24L01.h"
 #include "packet.h"
 #include "irled.h"
-#include "usbserial.h"
+//#include "usbserial.h"
 #include "tim4.h"
 #include "common.h"
 
@@ -58,7 +58,7 @@ void InitAll(void)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 
-	vUsbserialInit();
+	//vUsbserialInit();
 	vTimerInit();
 	vExtiInit();
 	vNrfHwInit();
@@ -73,7 +73,7 @@ void InitAll(void)
 	// this should be latest to let all other modules init EXTI
 	vExtiStart();
 }
-
+/*
 void vMainNrfDump(void)
 {
 	uint8_t buf[5];
@@ -92,20 +92,16 @@ void vMainNrfDump(void)
 		vUsbserialWrite(myitoa(buf[0], 16));
 	vUsbserialWrite("\r\n");
 }
-
+*/
 static uint16_t g_dht1=0, g_dht2=0;
 static uint8_t g_dht_status=0;
 
 void vMainDhtMeasure(void)
 {
-	uint32_t cnt;
-
 	vDht22Start();
-	cnt=0xffffffff;
-	while (uDht22Measuring() && cnt>0)
-		cnt--;
+	while (uDht22Measuring());
 
-	if (cnt>0 && uDht22CheckCrc())
+	if (uDht22CheckCrc())
 	{
 		g_dht1 = uDht22GetTemp();
 		g_dht2 = uDht22GetHumidity();
@@ -116,7 +112,7 @@ void vMainDhtMeasure(void)
 		g_dht_status = 0;
 }
 
-
+/*
 void vDhtTest(void)
 {
 	if (g_dht_status)
@@ -157,6 +153,7 @@ uint8_t handle_cmd(uint8_t *buf)
 
 	return 0;
 }
+*/
 
 int main(void)
 {
@@ -164,8 +161,8 @@ int main(void)
 	uint8_t payload_size;
 	uint8_t sender[5];
 	//const uint8_t cmd[]={0x80, 0x4d, 0x75, 0x8f, 0xce, 0x88, 0xf};
-	uint8_t buf[256];
-	uint32_t j=0;
+//	uint8_t buf[256];
+//	uint32_t j=0;
 	uint8_t state=1;
 
 	InitAll();
@@ -176,35 +173,35 @@ int main(void)
     {
 		IWDG_ReloadCounter();
 
-		if (g_MainStartDht)
+		if (g_MainStartDht && !uNrfIsSending())
 		{
 			g_MainStartDht=0;
 			vMainDhtMeasure();
+			state=!state;
+			if (state)
+				GPIO_SetBits(GPIOB, GPIO_Pin_1);
+			else
+				GPIO_ResetBits(GPIOB, GPIO_Pin_1);
 		}
 
-		if (uUsbSerialDataAvailable())
-		{
-			j += uUsbSerialRead(&buf[j], 256 - j);
-			if (buf[j-1]=='\r')		// this is wrong!!! need to scan whole string
-			{
-				buf[j-1]=0;
-				vUsbserialWrite("Command: ");
-				vUsbserialWrite((char *)buf);
-				vUsbserialWrite("\r\n");
-				j=0;
-
-				state=!state;
-				if (state)
-					GPIO_SetBits(GPIOB, GPIO_Pin_1);
-				else
-					GPIO_ResetBits(GPIOB, GPIO_Pin_1);
-
-				if (!handle_cmd(buf))
-					vUsbserialWrite("Unknown command...\r\n");
-
-				memset(buf, 0, 256);
-			}
-		}
+//		if (uUsbSerialDataAvailable())
+//		{
+//			j += uUsbSerialRead(&buf[j], 256 - j);
+//			if (buf[j-1]=='\r')		// this is wrong!!! need to scan whole string
+//			{
+//				buf[j-1]=0;
+//				vUsbserialWrite("Command: ");
+//				vUsbserialWrite((char *)buf);
+//				vUsbserialWrite("\r\n");
+//				j=0;
+//
+//
+//				if (!handle_cmd(buf))
+//					vUsbserialWrite("Unknown command...\r\n");
+//
+//				memset(buf, 0, 256);
+//			}
+//		}
 
 //		vTimerDelayMs(1000);
 //		vIrledSend(cmd, sizeof(cmd)*8);

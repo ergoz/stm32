@@ -37,14 +37,6 @@
         <include name="**/*.c"/>
         <include name="**/*.s"/>
       </fileset>
-      <fileset dir="C:\CooCox\CoIDE\workspace\stm32\STM32_USB">
-        <include name="**/*.c"/>
-        <include name="**/*.s"/>
-      </fileset>
-      <fileset dir="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver">
-        <include name="**/*.c"/>
-        <include name="**/*.s"/>
-      </fileset>
       <fileset dir="C:\CooCox\CoIDE\workspace\stm32\libs">
         <include name="**/*.c"/>
         <include name="**/*.s"/>
@@ -54,6 +46,8 @@
         <exclude name="light.h"/>
         <exclude name="motion.c"/>
         <exclude name="motion.h"/>
+        <exclude name="usbserial.c"/>
+        <exclude name="usbserial.h"/>
       </fileset>
       <project outfile="${project.name}.elf" overwrite="true" type="xcode"/>
       

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32server.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32server --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32server\link.ld -g">
-      <target file="stm32server.elf" lastModified="13921355cc3">
+      <target file="stm32server.elf" lastModified="13931056bf2">
          <source file="..\obj\otgd_fs_pcd.o" lastModified="1386378c692"/>
          <source file="..\obj\semihosting.o" lastModified="1386378c706"/>
          <source file="..\obj\usb_core.o" lastModified="1386378c80c"/>
@@ -22,7 +22,7 @@
          <source file="..\obj\usb_prop.o" lastModified="1386378ce4f"/>
          <source file="..\obj\usb_pwr.o" lastModified="1386378ceb4"/>
          <source file="..\obj\usb_init.o" lastModified="1386378cf0e"/>
-         <source file="..\obj\main.o" lastModified="13921355b64"/>
+         <source file="..\obj\main.o" lastModified="1393105697a"/>
          <source file="..\obj\otgd_fs_dev.o" lastModified="1386378cfe5"/>
          <source file="..\obj\printf.o" lastModified="1386378d07f"/>
          <source file="..\obj\stm32f10x_rcc.o" lastModified="1386378d10c"/>

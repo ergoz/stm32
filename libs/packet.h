@@ -31,6 +31,7 @@
 #define PACKET_PING		0x00
 #define PACKET_DHT22	0x01
 #define PACKET_AIR		0x02
+#define PACKET_LUX		0x03
 #define PACKET_CMD_MASK	0x7F
 
 #define GET_PACKET_CMD(x) 	(x&PACKET_CMD_MASK)
@@ -41,6 +42,7 @@ typedef union
 	uint16_t	dht22[2];	// temp + humidity from dht22
 	uint32_t	pressure;	// pressure from Freescale
 	uint32_t	temp;		// temperature from max6635
+	uint32_t	lux;		// lux from max44009
 	uint8_t		ir[7];		// Samsung air conditioneer command
 } packet_data;
 
