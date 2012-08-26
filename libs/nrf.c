@@ -177,8 +177,8 @@ void vNrfPowerUpRx(void)
 	CE_L();
 	uNrfWriteReg(CONFIG, NRF_CONFIG | ((1<<PWR_UP) | (1<<PRIM_RX)));
 	uNrfWriteReg(EN_RXADDR, (0<<ERX_P0) | (1<<ERX_P1));
-	CE_H();
 	uNrfWriteReg(STATUS, (1 << TX_DS) | (1 << MAX_RT));
+	CE_H();
 	// need delay!!! but inside interrupt!!
 }
 
@@ -211,16 +211,16 @@ void vNrfFlushRx(void)
 
 uint8_t uNrfIsSending(void)
 {
-	uint8_t status;
+//	uint8_t status;
 
 	if (g_uNrfTx)
 	{
-		status = uNrfReadReg(STATUS);
-		if (status & ( (1 << TX_DS) | (1 << MAX_RT) ) )
-		{
-			vNrfPowerUpRx();
-			return 0;
-		}
+//		status = uNrfReadReg(STATUS);
+//		if (status & ( (1 << TX_DS) | (1 << MAX_RT) ) )
+//		{
+//			vNrfPowerUpRx();
+//			return 0;
+//		}
 		return 1;
 	}
 	return 0;
@@ -239,6 +239,11 @@ uint8_t uNrfGetPayloadSize(void)
 uint8_t uNrfGetPayload(uint8_t *data, uint8_t len)
 {
 	return uQueueRead(&g_NrfQueue, data, len);
+}
+
+void vNrfSkipPayload(uint8_t len)
+{
+	vQueueSkip(&g_NrfQueue, len);
 }
 
 void uNrfToggleFeatures(void)

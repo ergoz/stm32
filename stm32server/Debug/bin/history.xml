@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
-   <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32server.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32server --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32server\link.ld -g">
-      <target file="stm32server.elf" lastModified="13931056bf2">
+   <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32server.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32server --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32server\arm-gcc-link.ld -g">
+      <target file="stm32server.elf" lastModified="139648fd7c7">
          <source file="..\obj\otgd_fs_pcd.o" lastModified="1386378c692"/>
          <source file="..\obj\semihosting.o" lastModified="1386378c706"/>
          <source file="..\obj\usb_core.o" lastModified="1386378c80c"/>
@@ -17,18 +17,20 @@
          <source file="..\obj\usb_regs.o" lastModified="1386378cc74"/>
          <source file="..\obj\common.o" lastModified="1391c43af6f"/>
          <source file="..\obj\startup_stm32f10x_md.o" lastModified="1386378ccbc"/>
-         <source file="..\obj\hw_config.o" lastModified="1391c43b00f"/>
+         <source file="..\obj\hw_config.o" lastModified="139648e904c"/>
+         <source file="..\obj\spi2.o" lastModified="139648e90d9"/>
          <source file="..\obj\stm32f10x_gpio.o" lastModified="1386378cdd5"/>
          <source file="..\obj\usb_prop.o" lastModified="1386378ce4f"/>
          <source file="..\obj\usb_pwr.o" lastModified="1386378ceb4"/>
          <source file="..\obj\usb_init.o" lastModified="1386378cf0e"/>
-         <source file="..\obj\main.o" lastModified="1393105697a"/>
+         <source file="..\obj\main.o" lastModified="139648f82f4"/>
          <source file="..\obj\otgd_fs_dev.o" lastModified="1386378cfe5"/>
          <source file="..\obj\printf.o" lastModified="1386378d07f"/>
          <source file="..\obj\stm32f10x_rcc.o" lastModified="1386378d10c"/>
-         <source file="..\obj\light.o" lastModified="1391c43b184"/>
+         <source file="..\obj\light.o" lastModified="139648e9230"/>
          <source file="..\obj\stm32f10x_exti.o" lastModified="1386378d173"/>
-         <source file="..\obj\usbserial.o" lastModified="1386378d1fd"/>
+         <source file="..\obj\usbserial.o" lastModified="139648e9349"/>
+         <source file="..\obj\mpl115a1.o" lastModified="139648e9490"/>
          <source file="..\obj\otgd_fs_int.o" lastModified="1386378d24e"/>
          <source file="..\obj\usb_sil.o" lastModified="1386378d2b2"/>
          <source file="..\obj\sh_cmd.o" lastModified="1386378d2cd"/>
@@ -36,15 +38,15 @@
          <source file="..\obj\otgd_fs_cal.o" lastModified="1386378d385"/>
          <source file="..\obj\exti.o" lastModified="1391c43b21e"/>
          <source file="..\obj\tim4.o" lastModified="1391c43b28f"/>
-         <source file="..\obj\queue.o" lastModified="1386378d49e"/>
+         <source file="..\obj\queue.o" lastModified="139648fd68f"/>
          <source file="..\obj\usb_endp.o" lastModified="1386378d505"/>
          <source file="..\obj\stm32f10x_dma.o" lastModified="1386378d575"/>
-         <source file="..\obj\dht22.o" lastModified="1391c43b31a"/>
+         <source file="..\obj\dht22.o" lastModified="139648e95d8"/>
          <source file="..\obj\misc.o" lastModified="1386378d667"/>
          <source file="..\obj\stm32f10x_spi.o" lastModified="1386378d6eb"/>
          <source file="..\obj\stm32f10x_i2c.o" lastModified="1386378d784"/>
          <source file="..\obj\usb_mem.o" lastModified="1386378d7df"/>
-         <source file="..\obj\nrf.o" lastModified="1391c43b3b1"/>
+         <source file="..\obj\nrf.o" lastModified="139648e96c2"/>
          <source file="..\obj\usb_istr.o" lastModified="1386378d8d1"/>
          <source file="..\obj\irled.o" lastModified="1391c43b41f"/>
          <source file="..\obj\stm32f10x_iwdg.o" lastModified="13920e1cd07"/>

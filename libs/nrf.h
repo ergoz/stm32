@@ -39,6 +39,7 @@ uint8_t uNrfGetLastTxStatus(void);
 uint8_t uNrfIsPayloadReceived(void);
 uint8_t uNrfGetPayloadSize(void);
 uint8_t uNrfGetPayload(uint8_t *data, uint8_t len);
+void vNrfSkipPayload(uint8_t len);
 
 uint8_t uNrfReadRegister(uint8_t reg, uint8_t *data, uint8_t len);
 

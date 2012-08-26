@@ -12,6 +12,7 @@
 #include "nRF24L01.h"
 #include "packet.h"
 #include "irled.h"
+#include "mpl115a1.h"
 //#include "usbserial.h"
 #include "tim4.h"
 #include "common.h"
@@ -65,6 +66,7 @@ void InitAll(void)
 	vNrfInit(0, (uint8_t *)NRF_OWN_ADDR);
 	vDht22Init();
 	vIrledInit();
+	vMpl115a1Init();
 
 	vTim4Init(60000, 12000);
 	vTim4SetCb(&vMainTim4Cb);
@@ -236,6 +238,12 @@ int main(void)
 						pkt.status = g_dht_status;
 						pkt.data.dht22[0] = g_dht1;
 						pkt.data.dht22[1] = g_dht2;
+						break;
+					}
+					case PACKET_PRESSURE:
+					{
+						pkt.status = 1;
+						pkt.data.pressure = uMpl115a1ReadPressure();
 						break;
 					}
 					default:

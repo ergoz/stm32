@@ -35,18 +35,22 @@
       
       <fileset dir=".">
         <include name="**/*.c"/>
+        <include name="**/*.cpp"/>
         <include name="**/*.s"/>
       </fileset>
       <fileset dir="C:\CooCox\CoIDE\workspace\stm32\STM32_USB">
         <include name="**/*.c"/>
+        <include name="**/*.cpp"/>
         <include name="**/*.s"/>
       </fileset>
       <fileset dir="C:\CooCox\CoIDE\workspace\stm32\STM32_USB-FS-Device_Driver">
         <include name="**/*.c"/>
+        <include name="**/*.cpp"/>
         <include name="**/*.s"/>
       </fileset>
       <fileset dir="C:\CooCox\CoIDE\workspace\stm32\libs">
         <include name="**/*.c"/>
+        <include name="**/*.cpp"/>
         <include name="**/*.s"/>
         <exclude name="irled.c"/>
         <exclude name="irled.h"/>
@@ -100,7 +104,7 @@
       <linkerarg value="-mthumb"/>
       <linkerarg value="-L${linkdir}"/>
       <linkerarg value="--gc-sections"/>
-      <linkerarg value="-T${linkdir}\link.ld"/>
+      <linkerarg value="-TC:\CooCox\CoIDE\workspace\stm32\stm32usb\arm-gcc-link.ld"/>
       
     </cc>
   </target>

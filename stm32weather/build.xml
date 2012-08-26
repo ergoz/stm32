@@ -35,10 +35,12 @@
       
       <fileset dir=".">
         <include name="**/*.c"/>
+        <include name="**/*.cpp"/>
         <include name="**/*.s"/>
       </fileset>
       <fileset dir="C:\CooCox\CoIDE\workspace\stm32\libs">
         <include name="**/*.c"/>
+        <include name="**/*.cpp"/>
         <include name="**/*.s"/>
         <exclude name="led.c"/>
         <exclude name="led.h"/>
@@ -86,7 +88,7 @@
       <linkerarg value="-mthumb"/>
       <linkerarg value="-L${linkdir}"/>
       <linkerarg value="--gc-sections"/>
-      <linkerarg value="-T${linkdir}\link.ld"/>
+      <linkerarg value="-TC:\CooCox\CoIDE\workspace\stm32\stm32weather\arm-gcc-link.ld"/>
       
     </cc>
   </target>

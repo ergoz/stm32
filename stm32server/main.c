@@ -4,7 +4,6 @@
 #include "stm32f10x_iwdg.h"
 #include "misc.h"
 #include "nrf.h"
-//#include "dht22.h"
 #include "exti.h"
 #include "timer.h"
 #include "usbserial.h"
@@ -73,7 +72,6 @@ void InitAll(void)
 	vExtiInit();
 	vNrfHwInit();
 	vNrfInit(0, (uint8_t *)NRF_OWN_ADDR);
-//	vDht22Init();
 	vMainIWDGInit();
 
 	// this should be latest to let all other modules init EXTI
@@ -202,6 +200,15 @@ void vLuxSend(uint8_t *addr)
 	vNrfSend(addr, (uint8_t *) &pkt, sizeof(Packet_t));
 }
 
+void vPressureSend(uint8_t *addr)
+{
+	Packet_t pkt;
+
+	pkt.cmd=PACKET_PRESSURE;
+	memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+	vNrfSend(addr, (uint8_t *) &pkt, sizeof(Packet_t));
+}
+
 
 uint8_t handle_cmd(uint8_t *buf)
 {
@@ -248,6 +255,13 @@ uint8_t handle_cmd(uint8_t *buf)
 			return 1;
 		}
 
+		if (strlen((const char *)buf)>7 &&
+				memcmp((const char *)buf, (const char *)"pressure", 8)==0)
+		{
+			vPressureSend(p);
+			return 1;
+		}
+
 		if (strlen((const char *)buf)>2 &&
 				memcmp((const char *)buf, (const char *)"lux", 3)==0)
 		{
@@ -266,7 +280,7 @@ int main(void)
 {
 	uint32_t j;
 	uint8_t state=1;
-	uint8_t buf[256], name[6];
+	uint8_t buf[256], sender[6];
 	uint8_t payload_size;
 	Packet_t pkt;
 
@@ -309,69 +323,103 @@ int main(void)
 		{
 			payload_size = uNrfGetPayloadSize();
 			if (payload_size==sizeof(Packet_t))
+			{
 				uNrfGetPayload((uint8_t *)&pkt, sizeof(Packet_t));
 
-			vUsbserialWrite("Received packet from: ");
-			memset(name, 0, 6);
-			memcpy(name, pkt.sender, 5);
-			vUsbserialWrite(name);
-			vUsbserialWrite("\r\n");
+				vUsbserialWrite("Received packet from: ");
+				memset(sender, 0, 6);
+				memcpy(sender, pkt.sender, 5);
+				vUsbserialWrite(sender);
+				vUsbserialWrite("\r\n");
 
-			if ((pkt.cmd&PACKET_REPLY)==PACKET_REPLY)
-			{
-				switch (pkt.cmd&PACKET_CMD_MASK)
+				if ((pkt.cmd&PACKET_REPLY)==PACKET_REPLY)
 				{
-				case PACKET_DHT22:
-				{
-					if (pkt.status==1)
+					switch (pkt.cmd&PACKET_CMD_MASK)
 					{
-						vUsbserialWrite("Temp: ");
-						vUsbserialWrite(myitoa(pkt.data.dht22[0] / 10, 10));
-						vUsbserialWrite(".");
-						if (pkt.data.dht22[0] % 10 != 0)
-							vUsbserialWrite(myitoa(pkt.data.dht22[0] % 10, 10));
-						else
-							vUsbserialWrite("0");
-						vUsbserialWrite("\r\n");
+						case PACKET_DHT22:
+						{
+							if (pkt.status==1)
+							{
+								vUsbserialWrite("Temp: ");
+								vUsbserialWrite(myitoa(pkt.data.dht22[0] / 10, 10));
+								vUsbserialWrite(".");
+								if (pkt.data.dht22[0] % 10 != 0)
+									vUsbserialWrite(myitoa(pkt.data.dht22[0] % 10, 10));
+								else
+									vUsbserialWrite("0");
+								vUsbserialWrite("\r\n");
 
-						vUsbserialWrite("Humidity: ");
-						vUsbserialWrite(myitoa(pkt.data.dht22[1] / 10, 10));
-						vUsbserialWrite(".");
-						if (pkt.data.dht22[1] % 10 != 0)
-							vUsbserialWrite(myitoa(pkt.data.dht22[1] % 10, 10));
-						else
-							vUsbserialWrite("0");
-						vUsbserialWrite("\r\n");
+								vUsbserialWrite("Humidity: ");
+								vUsbserialWrite(myitoa(pkt.data.dht22[1] / 10, 10));
+								vUsbserialWrite(".");
+								if (pkt.data.dht22[1] % 10 != 0)
+									vUsbserialWrite(myitoa(pkt.data.dht22[1] % 10, 10));
+								else
+									vUsbserialWrite("0");
+								vUsbserialWrite("\r\n");
+							}
+							else
+								vUsbserialWrite("DHT22 measuring failed!\r\n");
+							break;
+						}
+						case PACKET_LUX:
+						{
+							if (pkt.status==1)
+							{
+								vUsbserialWrite("Lux: ");
+								vUsbserialWrite(myitoa(pkt.data.lux, 10));
+								vUsbserialWrite("\r\n");
+							}
+							break;
+						}
+						case PACKET_PRESSURE:
+						{
+							if (pkt.status==1)
+							{
+								vUsbserialWrite("Pressure: ");
+								vUsbserialWrite(myitoa(pkt.data.pressure, 10));
+								vUsbserialWrite("\r\n");
+							}
+							break;
+						}
+						default:
+						{
+							vUsbserialWrite("Packet type: ");
+							vUsbserialWrite(myitoa(pkt.cmd&PACKET_CMD_MASK, 10));
+							vUsbserialWrite("\r\n");
+							vUsbserialWrite("Status: ");
+							if (pkt.status==1)
+								vUsbserialWrite("Ok\r\n");
+							else
+								vUsbserialWrite("Failed\r\n");
+							break;
+						}
 					}
-					else
-						vUsbserialWrite("DHT22 measuring failed!\r\n");
-					break;
+
 				}
-				case PACKET_LUX:
+				else // ask
 				{
-					if (pkt.status==1)
+					memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+					pkt.cmd |= PACKET_REPLY;
+
+					switch (pkt.cmd & PACKET_CMD_MASK)
 					{
-						vUsbserialWrite("Lux: ");
-						vUsbserialWrite(myitoa(pkt.data.lux, 10));
-						vUsbserialWrite("\r\n");
+						case PACKET_PING:
+						{
+							pkt.status = 1;
+							break;
+						}
+						default:
+						{
+							pkt.status = 0;
+							break;
+						}
 					}
-					break;
+					vNrfSend((uint8_t *) sender, (uint8_t *) &pkt, sizeof(Packet_t));
 				}
-				default:
-				{
-					vUsbserialWrite("Packet type: ");
-					vUsbserialWrite(myitoa(pkt.cmd&PACKET_CMD_MASK, 10));
-					vUsbserialWrite("\r\n");
-					vUsbserialWrite("Status: ");
-					if (pkt.status==1)
-						vUsbserialWrite("Ok\r\n");
-					else
-						vUsbserialWrite("Failed\r\n");
-					break;
-				}
-				}
-
 			}
+			else
+				vNrfSkipPayload(payload_size);
 		}
 	}
 }

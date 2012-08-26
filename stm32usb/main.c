@@ -180,6 +180,14 @@ void vLuxTest(void)
 	vNrfSend((uint8_t *) "litt1", (uint8_t *) &pkt, sizeof(Packet_t));
 }
 
+void vPressureTest(void)
+{
+	Packet_t pkt;
+	pkt.cmd=PACKET_PRESSURE;
+	memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+	vNrfSend((uint8_t *) "temp1", (uint8_t *) &pkt, sizeof(Packet_t));
+}
+
 void vDhtTest(void)
 {
 	Packet_t pkt;
@@ -223,6 +231,13 @@ uint8_t handle_cmd(uint8_t *buf)
 			memcmp((const char *)buf, (const char *)"lux", 3)==0)
 	{
 		vLuxTest();
+		return 1;
+	}
+
+	if (strlen((const char *)buf)>7 &&
+			memcmp((const char *)buf, (const char *)"pressure", 8)==0)
+	{
+		vPressureTest();
 		return 1;
 	}
 
@@ -284,55 +299,69 @@ int main(void)
 		{
 			payload_size = uNrfGetPayloadSize();
 			if (payload_size==sizeof(Packet_t))
+			{
+
 				uNrfGetPayload((uint8_t *)&pkt, sizeof(Packet_t));
 
-			vUsbserialWrite("Received packet from:");
-			memset(name, 0, 6);
-			memcpy(name, pkt.sender, 5);
-			vUsbserialWrite(name);
-			vUsbserialWrite("\r\n");
+				vUsbserialWrite("Received packet from:");
+				memset(name, 0, 6);
+				memcpy(name, pkt.sender, 5);
+				vUsbserialWrite(name);
+				vUsbserialWrite("\r\n");
 
-			if ((pkt.cmd&PACKET_REPLY)==PACKET_REPLY)
-			{
-				switch (pkt.cmd&PACKET_CMD_MASK)
+				if ((pkt.cmd&PACKET_REPLY)==PACKET_REPLY)
 				{
-				case PACKET_DHT22:
-				{
-					if (pkt.status==1)
+					switch (pkt.cmd&PACKET_CMD_MASK)
 					{
-						vUsbserialWrite("Temp: ");
-						vUsbserialWrite(myitoa(pkt.data.dht22[0] / 10, 10));
-						vUsbserialWrite(".");
-						vUsbserialWrite(myitoa(pkt.data.dht22[0] % 10, 10));
-						vUsbserialWrite("\r\n");
+						case PACKET_DHT22:
+						{
+							if (pkt.status==1)
+							{
+								vUsbserialWrite("Temp: ");
+								vUsbserialWrite(myitoa(pkt.data.dht22[0] / 10, 10));
+								vUsbserialWrite(".");
+								vUsbserialWrite(myitoa(pkt.data.dht22[0] % 10, 10));
+								vUsbserialWrite("\r\n");
 
-						vUsbserialWrite("Humidity: ");
-						vUsbserialWrite(myitoa(pkt.data.dht22[1] / 10, 10));
-						vUsbserialWrite(".");
-						vUsbserialWrite(myitoa(pkt.data.dht22[1] % 10, 10));
-						vUsbserialWrite("\r\n");
+								vUsbserialWrite("Humidity: ");
+								vUsbserialWrite(myitoa(pkt.data.dht22[1] / 10, 10));
+								vUsbserialWrite(".");
+								vUsbserialWrite(myitoa(pkt.data.dht22[1] % 10, 10));
+								vUsbserialWrite("\r\n");
+							}
+							else
+								vUsbserialWrite("DHT22 measuring failed!\r\n");
+							break;
+						}
+						case PACKET_LUX:
+						{
+							vUsbserialWrite("Lux: ");
+							vUsbserialWrite(myitoa(pkt.data.lux, 10));
+							vUsbserialWrite("\r\n");
+							break;
+						}
+						case PACKET_PRESSURE:
+						{
+							vUsbserialWrite("Pressure: ");
+							vUsbserialWrite(myitoa(pkt.data.pressure, 10));
+							vUsbserialWrite("\r\n");
+							break;
+						}
+						default:
+						{
+							vUsbserialWrite("Packet type: ");
+							vUsbserialWrite(myitoa(pkt.cmd, 10));
+							vUsbserialWrite("\r\n");
+							break;
+						}
 					}
-					else
-						vUsbserialWrite("DHT22 measuring failed!\r\n");
-					break;
 				}
-				case PACKET_LUX:
+				else	// ask??
 				{
-					vUsbserialWrite("Lux: ");
-					vUsbserialWrite(myitoa(pkt.data.lux, 10));
-					vUsbserialWrite("\r\n");
-					break;
 				}
-				default:
-				{
-					vUsbserialWrite("Packet type: ");
-					vUsbserialWrite(myitoa(pkt.cmd, 10));
-					vUsbserialWrite("\r\n");
-					break;
-				}
-				}
-
 			}
+			else
+				vNrfSkipPayload(payload_size);
 		}
 	}
 }

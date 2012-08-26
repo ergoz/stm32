@@ -1,15 +1,15 @@
 /**************************************************************************//**
- * @file     queue.h
- * @brief    STM32 generic queue func definitions header file
+ * @file     mpl115a1.h
+ * @brief    STM32 MPL115A1 func definitions header file
  * @version  v1.0
- * @date     04.06.2012
+ * @date     27.08.2012
  *
  * @note
  * Copyright (C) 2012 kab
  *
  ******************************************************************************/
-#ifndef __QUEUE_H__
-#define __QUEUE_H__
+#ifndef __MPL115A1_H__
+#define __MPL115A1_H__
 
 /******************************************************************************
  * Includes
@@ -18,33 +18,18 @@
 #include <inttypes.h>
 
 /******************************************************************************
- * Defines and Macros
+ * Enumeration declarations
  *****************************************************************************/
-
-/** Maximum number of queued transmit messages (must be a power of 2: 2^N) */
-#define MAXIMUM_QUEUE_SIZE   1024
 
 /******************************************************************************
- * Types declarations
+ * Function pointer (call-back) declarations
  *****************************************************************************/
-
-typedef struct
-{
-    volatile uint32_t ReadIndex;
-    volatile uint32_t WriteIndex;
-    volatile uint8_t Queue[MAXIMUM_QUEUE_SIZE];
-} Queue_t, *pQueue_t;
 
 /******************************************************************************
  * Function declarations
  *****************************************************************************/
 
-uint32_t uQueueWrite(pQueue_t pQueue, uint8_t *pData, uint32_t length);
-uint32_t uQueueRead(pQueue_t pQueue, uint8_t *pData, uint32_t length);
-void vQueueSkip(pQueue_t pQueue, uint32_t length);
-uint32_t uQueueWriteByte(pQueue_t pQueue, uint8_t data);
-uint8_t uQueueReadByte(pQueue_t pQueue);
-uint32_t uQueueGetBytesToRead(pQueue_t pQueue);
-inline uint32_t uQueueCalculateIndex(uint32_t index, uint32_t offset);
+void vMpl115a1Init(void);
+uint32_t uMpl115a1ReadPressure(void);
 
 #endif

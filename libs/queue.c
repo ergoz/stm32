@@ -43,6 +43,22 @@ uint32_t uQueueWrite(pQueue_t pQueue, uint8_t *pData, uint32_t length)
     return length;
 }
 
+void vQueueSkip(pQueue_t pQueue, uint32_t length)
+{
+	InterruptStatus_t status;
+	uint32_t j, read_index;
+
+	status = Interrupt_saveAndDisable();
+	read_index = pQueue->ReadIndex;
+	Interrupt_restore(status);
+
+	j=uQueueGetBytesToRead(pQueue);
+	if (length<j)
+		j=length;
+
+	pQueue->ReadIndex=uQueueCalculateIndex(read_index, j);
+}
+
 uint32_t uQueueRead(pQueue_t pQueue, uint8_t *pData, uint32_t length)
 {
 	InterruptStatus_t status;

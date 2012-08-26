@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
-   <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32weather.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32weather --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32weather\link.ld -g">
-      <target file="stm32weather.elf" lastModified="139261a3d7c">
+   <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32weather.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32weather --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32weather\arm-gcc-link.ld -g">
+      <target file="stm32weather.elf" lastModified="139648696fd">
          <source file="..\obj\spi.o" lastModified="1392619e841"/>
          <source file="..\obj\stm32f10x_tim.o" lastModified="1392619e955"/>
          <source file="..\obj\core_cm3.o" lastModified="1392619e9aa"/>
@@ -9,20 +9,22 @@
          <source file="..\obj\system_stm32f10x.o" lastModified="1392619ea65"/>
          <source file="..\obj\common.o" lastModified="1392619eac0"/>
          <source file="..\obj\startup_stm32f10x_md.o" lastModified="1392619eb00"/>
+         <source file="..\obj\spi2.o" lastModified="1396483c7fc"/>
          <source file="..\obj\stm32f10x_gpio.o" lastModified="1392619eb78"/>
-         <source file="..\obj\main.o" lastModified="1392619ebe5"/>
+         <source file="..\obj\main.o" lastModified="13964869603"/>
          <source file="..\obj\stm32f10x_rcc.o" lastModified="1392619ec67"/>
          <source file="..\obj\stm32f10x_exti.o" lastModified="1392619ecc2"/>
+         <source file="..\obj\mpl115a1.o" lastModified="1396483c973"/>
          <source file="..\obj\syscalls.o" lastModified="1392619ed9a"/>
          <source file="..\obj\exti.o" lastModified="1392619ee1f"/>
          <source file="..\obj\tim4.o" lastModified="1392619ee87"/>
-         <source file="..\obj\queue.o" lastModified="1392619eef1"/>
+         <source file="..\obj\queue.o" lastModified="1396483c9ff"/>
          <source file="..\obj\stm32f10x_dma.o" lastModified="1392619ef55"/>
-         <source file="..\obj\dht22.o" lastModified="1392619efc1"/>
+         <source file="..\obj\dht22.o" lastModified="1396483ca9b"/>
          <source file="..\obj\misc.o" lastModified="1392619f020"/>
          <source file="..\obj\stm32f10x_spi.o" lastModified="1392619f0a7"/>
          <source file="..\obj\stm32f10x_i2c.o" lastModified="1392619f12d"/>
-         <source file="..\obj\nrf.o" lastModified="1392619f1b6"/>
+         <source file="..\obj\nrf.o" lastModified="1396483cb76"/>
          <source file="..\obj\irled.o" lastModified="1392619f21d"/>
          <source file="..\obj\stm32f10x_iwdg.o" lastModified="1392619f27b"/>
       </target>
