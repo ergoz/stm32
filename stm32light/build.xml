@@ -35,10 +35,12 @@
       
       <fileset dir=".">
         <include name="**/*.c"/>
+        <include name="**/*.cpp"/>
         <include name="**/*.s"/>
       </fileset>
       <fileset dir="C:\CooCox\CoIDE\workspace\stm32\libs">
         <include name="**/*.c"/>
+        <include name="**/*.cpp"/>
         <include name="**/*.s"/>
         <exclude name="dht22.c"/>
         <exclude name="dht22.h"/>
@@ -80,7 +82,7 @@
       <linkerarg value="-mthumb"/>
       <linkerarg value="-L${linkdir}"/>
       <linkerarg value="--gc-sections"/>
-      <linkerarg value="-T${linkdir}\link.ld"/>
+      <linkerarg value="-TC:\CooCox\CoIDE\workspace\stm32\stm32light\arm-gcc-link.ld"/>
       
     </cc>
   </target>

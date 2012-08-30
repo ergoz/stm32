@@ -262,6 +262,15 @@
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\otgd_fs_cal.h"/>
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\otgd_fs_pcd.h"/>
       </source>
+      <source file="..\..\..\libs\spi2.c" lastModified="13964a14690">
+         <include file="..\..\..\libs\spi2.h"/>
+         <include file="..\..\cmsis_boot\stm32f10x.h"/>
+         <include file="..\..\stm_lib\inc\stm32f10x_rcc.h"/>
+         <include file="..\..\stm_lib\inc\stm32f10x_gpio.h"/>
+         <include file="..\..\stm_lib\inc\stm32f10x_spi.h"/>
+         <include file="..\..\stm_lib\inc\stm32f10x_dma.h"/>
+         <include file="..\..\stm_lib\inc\misc.h"/>
+      </source>
       <source file="..\..\..\STM32_USB\usb_endp.c" lastModified="1381f1ef1b0">
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
          <include file="..\..\..\STM32_USB\usb_desc.h"/>
@@ -274,8 +283,6 @@
       </source>
       <source file="..\..\..\STM32_USB\usb_istr.h" lastModified="13537314bc0">
          <include file="..\..\..\STM32_USB\usb_conf.h"/>
-      </source>
-      <source file="..\..\..\libs\packet.h" lastModified="1396485f84f">
       </source>
       <source file="..\..\stm_lib\inc\stm32f10x_tim.h" lastModified="1381a284927">
          <include file="..\..\cmsis_boot\stm32f10x.h"/>
@@ -378,20 +385,6 @@
          <include file="..\..\cmsis_boot\stm32f10x.h"/>
          <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_type.h"/>
       </source>
-      <source file="..\..\main.c" lastModified="13964a0d7b3">
-         <include file="..\..\cmsis_boot\stm32f10x.h"/>
-         <include file="..\..\stm_lib\inc\stm32f10x_gpio.h"/>
-         <include file="..\..\stm_lib\inc\stm32f10x_rcc.h"/>
-         <include file="..\..\stm_lib\inc\misc.h"/>
-         <include file="..\..\..\libs\nrf.h"/>
-         <include file="..\..\..\libs\exti.h"/>
-         <include file="..\..\..\libs\timer.h"/>
-         <include file="..\..\..\libs\usbserial.h"/>
-         <include file="..\..\..\libs\queue.h"/>
-         <include file="..\..\..\libs\nRF24L01.h"/>
-         <include file="..\..\..\libs\packet.h"/>
-         <include file="..\..\..\libs\common.h"/>
-      </source>
       <source file="..\..\..\STM32_USB\usb_desc.h" lastModified="12ecc892780">
       </source>
       <source file="..\..\cmsis_boot\system_stm32f10x.h" lastModified="1381a27ec5b">
@@ -435,13 +428,27 @@
       </source>
       <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_core.h" lastModified="12ecc885c60">
       </source>
-      <source file="..\..\..\libs\nrf.h" lastModified="139648f7e82">
-      </source>
       <source file="..\..\..\libs\usbserial.h" lastModified="13824d288d3">
       </source>
       <source file="..\..\..\libs\interrupt.h" lastModified="125e90222a8">
          <include file="..\..\cmsis_boot\stm32f10x.h"/>
          <include file="..\..\cmsis\core_cm3.h"/>
+      </source>
+      <source file="..\..\..\libs\nrf.c" lastModified="13964a233db">
+         <include file="..\..\..\libs\spi.h"/>
+         <include file="..\..\cmsis_boot\stm32f10x.h"/>
+         <include file="..\..\stm_lib\inc\stm32f10x_rcc.h"/>
+         <include file="..\..\stm_lib\inc\stm32f10x_gpio.h"/>
+         <include file="..\..\stm_lib\inc\stm32f10x_spi.h"/>
+         <include file="..\..\stm_lib\inc\stm32f10x_dma.h"/>
+         <include file="..\..\stm_lib\inc\misc.h"/>
+         <include file="..\..\..\libs\spi.h"/>
+         <include file="..\..\..\libs\exti.h"/>
+         <include file="..\..\..\libs\queue.h"/>
+         <include file="..\..\..\libs\interrupt.h"/>
+         <include file="..\..\..\libs\nRF24L01.h"/>
+         <include file="..\..\..\libs\timer.h"/>
+         <include file="..\..\..\libs\usbserial.h"/>
       </source>
       <source file="..\..\..\libs\usbserial.c" lastModified="13824d29036">
          <include file="..\..\cmsis_boot\stm32f10x.h"/>

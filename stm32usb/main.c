@@ -197,6 +197,18 @@ void vDhtTest(void)
 	vNrfSend((uint8_t *) "temp1", (uint8_t *) &pkt, sizeof(Packet_t));
 }
 
+void vLampTest(uint8_t state)
+{
+	Packet_t pkt;
+
+	if (state)
+		pkt.cmd=PACKET_LAMP_ON;
+	else
+		pkt.cmd=PACKET_LAMP_OFF;
+	memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+	vNrfSend((uint8_t *) "temp1", (uint8_t *) &pkt, sizeof(Packet_t));
+}
+
 uint8_t handle_cmd(uint8_t *buf)
 {
 	if (strlen((const char *) buf) > 5 &&
@@ -231,6 +243,20 @@ uint8_t handle_cmd(uint8_t *buf)
 			memcmp((const char *)buf, (const char *)"lux", 3)==0)
 	{
 		vLuxTest();
+		return 1;
+	}
+
+	if (strlen((const char *)buf)>5 &&
+			memcmp((const char *)buf, (const char *)"lampon", 6)==0)
+	{
+		vLampTest(1);
+		return 1;
+	}
+
+	if (strlen((const char *)buf)>6 &&
+			memcmp((const char *)buf, (const char *)"lampoff", 7)==0)
+	{
+		vLampTest(0);
 		return 1;
 	}
 

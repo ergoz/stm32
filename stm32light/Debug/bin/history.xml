@@ -1,34 +1,38 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
-   <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32light.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32light --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32light\link.ld -g">
-      <target file="stm32light.elf" lastModified="13930fc5fce">
-         <source file="..\obj\semihosting.o" lastModified="138660bf337"/>
-         <source file="..\obj\spi.o" lastModified="138660bf3bc"/>
-         <source file="..\obj\stm32f10x_tim.o" lastModified="138660bf500"/>
-         <source file="..\obj\motion.o" lastModified="138660bf59d"/>
-         <source file="..\obj\core_cm3.o" lastModified="138660bf5f4"/>
-         <source file="..\obj\timer.o" lastModified="13930fb5bbd"/>
-         <source file="..\obj\system_stm32f10x.o" lastModified="138660bf6b7"/>
-         <source file="..\obj\led.o" lastModified="13930fb5c4b"/>
-         <source file="..\obj\common.o" lastModified="13930fb5cbc"/>
-         <source file="..\obj\startup_stm32f10x_md.o" lastModified="138660bf758"/>
-         <source file="..\obj\stm32f10x_gpio.o" lastModified="138660bf7cb"/>
-         <source file="..\obj\main.o" lastModified="13930fc5ea0"/>
-         <source file="..\obj\printf.o" lastModified="138660bf8dc"/>
-         <source file="..\obj\stm32f10x_rcc.o" lastModified="138660bf95e"/>
-         <source file="..\obj\light.o" lastModified="13930fb5dd2"/>
-         <source file="..\obj\stm32f10x_exti.o" lastModified="138660bfa34"/>
-         <source file="..\obj\sh_cmd.o" lastModified="138660bfa50"/>
-         <source file="..\obj\syscalls.o" lastModified="138660bfaa4"/>
-         <source file="..\obj\exti.o" lastModified="1386640336c"/>
-         <source file="..\obj\tim4.o" lastModified="13930fb5e4a"/>
-         <source file="..\obj\queue.o" lastModified="138660bfb8c"/>
-         <source file="..\obj\stm32f10x_dma.o" lastModified="138660bfbf8"/>
-         <source file="..\obj\misc.o" lastModified="138660bfc52"/>
-         <source file="..\obj\stm32f10x_spi.o" lastModified="138660bfccb"/>
-         <source file="..\obj\stm32f10x_i2c.o" lastModified="138660bfd54"/>
-         <source file="..\obj\nrf.o" lastModified="13930fb5f0b"/>
-         <source file="..\obj\irled.o" lastModified="13930fb5fc2"/>
+   <processor signature="4.5.2 -O0 -nostartfiles -Map=stm32light.map -mcpu=cortex-m3 -mthumb -LC:\CooCox\CoIDE\workspace\stm32\stm32light --gc-sections -TC:\CooCox\CoIDE\workspace\stm32\stm32light\arm-gcc-link.ld -g">
+      <target file="stm32light.elf" lastModified="13978b1ac85">
+         <source file="..\obj\semihosting.o" lastModified="13978b1996b"/>
+         <source file="..\obj\spi.o" lastModified="13978b19a1a"/>
+         <source file="..\obj\stm32f10x_tim.o" lastModified="13978b19b66"/>
+         <source file="..\obj\motion.o" lastModified="13978b19be0"/>
+         <source file="..\obj\core_cm3.o" lastModified="13978b19c56"/>
+         <source file="..\obj\timer.o" lastModified="13978b19ce3"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="13978b19d5f"/>
+         <source file="..\obj\led.o" lastModified="13978b19de6"/>
+         <source file="..\obj\common.o" lastModified="13978b19e6c"/>
+         <source file="..\obj\startup_stm32f10x_md.o" lastModified="13978b19ed3"/>
+         <source file="..\obj\spi2.o" lastModified="13978b19f55"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="13978b19ff1"/>
+         <source file="..\obj\main.o" lastModified="13978b1a098"/>
+         <source file="..\obj\printf.o" lastModified="13978b1a15c"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="13978b1a1fd"/>
+         <source file="..\obj\light.o" lastModified="13978b1a298"/>
+         <source file="..\obj\stm32f10x_exti.o" lastModified="13978b1a318"/>
+         <source file="..\obj\mpl115a1.o" lastModified="13978b1a39b"/>
+         <source file="..\obj\sh_cmd.o" lastModified="13978b1a3c9"/>
+         <source file="..\obj\syscalls.o" lastModified="13978b1a440"/>
+         <source file="..\obj\exti.o" lastModified="13978b1a4e4"/>
+         <source file="..\obj\tim4.o" lastModified="13978b1a56c"/>
+         <source file="..\obj\queue.o" lastModified="13978b1a5f2"/>
+         <source file="..\obj\stm32f10x_dma.o" lastModified="13978b1a682"/>
+         <source file="..\obj\misc.o" lastModified="13978b1a6ff"/>
+         <source file="..\obj\stm32f10x_wwdg.o" lastModified="13978b1a782"/>
+         <source file="..\obj\stm32f10x_spi.o" lastModified="13978b1a874"/>
+         <source file="..\obj\stm32f10x_i2c.o" lastModified="13978b1a935"/>
+         <source file="..\obj\nrf.o" lastModified="13978b1a9ec"/>
+         <source file="..\obj\irled.o" lastModified="13978b1aa96"/>
+         <source file="..\obj\stm32f10x_iwdg.o" lastModified="13978b1ab23"/>
       </target>
    </processor>
 </history>

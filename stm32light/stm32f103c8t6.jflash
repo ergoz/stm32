@@ -1,4 +1,4 @@
-  AppVersion = 45011
+  AppVersion = 45202
 [GENERAL]
   ConnectMode = 0
   CurrentFile = "C:\CooCox\CoIDE\workspace\stm32\stm32light\Debug\bin\stm32light.bin"
@@ -67,11 +67,17 @@
   AutoPerformsStartApp = 1
   AutoPerformsUnsecure = 0
   AutoPerformsVerify = 1
-  Delay = 0x000001F4
-  EnableTargetPowerDelay = 0x00000014
+  EnableProductionMode = 0
+  EnableTargetPower = 1
   EraseType = 2
+  ProductionDelay = 0x000001F4
+  ProductionThreshold = 0x00000BB8
   ProgramSN = 0
+  SerialFile = ""
   SNAddr = 0x00000000
   SNInc = 0x00000001
-  Threshold = 0x00000BB8
+  SNLen = 0x00000008
+  SNListFile = ""
+  SNValue = 0x00000002
+  TargetPowerDelay = 0x00000014
   VerifyType = 1

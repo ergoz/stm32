@@ -52,6 +52,19 @@ static void vLtCbState(ExtiLineState_t state) {
 	g_currentLight = state;
 }
 
+void vLampSet(uint8_t state)
+{
+	Packet_t pkt;
+
+	if (state)
+		pkt.cmd=PACKET_LAMP_ON;
+	else
+		pkt.cmd=PACKET_LAMP_OFF;
+	memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+	vNrfSend((uint8_t *) "temp1", (uint8_t *) &pkt, sizeof(Packet_t));
+}
+
+
 void InitAll(void) {
 	GPIO_InitTypeDef GPIO_InitStructure;
 
@@ -128,30 +141,33 @@ int main(void) {
 			if (payload_size==sizeof(Packet_t))
 			{
 				uNrfGetPayload((uint8_t *)&pkt, sizeof(Packet_t));
-				memcpy(sender, pkt.sender, 5);
-				memcpy(pkt.sender, NRF_OWN_ADDR, 5);
-				pkt.cmd|=PACKET_REPLY;
-
-				switch (GET_PACKET_CMD(pkt.cmd))
+				if ((pkt.cmd&PACKET_REPLY)==0)
 				{
-					case PACKET_PING:
+					memcpy(sender, pkt.sender, 5);
+					memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+					pkt.cmd|=PACKET_REPLY;
+
+					switch (GET_PACKET_CMD(pkt.cmd))
 					{
-						pkt.status = 1;
-						break;
-					}
-					case PACKET_LUX:
-					{
-						pkt.data.lux=uLightReadLux();
-						pkt.status = 1;
-						break;
-					}
-					default:
-					{
-						pkt.status = 0;
-						break;
-					}
-				};
-				vNrfSend((uint8_t *) sender, (uint8_t *) &pkt, sizeof(Packet_t));
+						case PACKET_PING:
+						{
+							pkt.status = 1;
+							break;
+						}
+						case PACKET_LUX:
+						{
+							pkt.data.lux=uLightReadLux();
+							pkt.status = 1;
+							break;
+						}
+						default:
+						{
+							pkt.status = 0;
+							break;
+						}
+					};
+					vNrfSend((uint8_t *) sender, (uint8_t *) &pkt, sizeof(Packet_t));
+				}
 			}
 		}
 
@@ -168,6 +184,7 @@ int main(void) {
 						ledActive = 0;
 						motionEnabled = 0;
 						lastTime = 0;
+						vLampSet(0);
 					}
 				} else // light should be low
 				{
@@ -177,6 +194,7 @@ int main(void) {
 						ledActive = 1;
 						motionEnabled = 1;
 						lastTime = timeMs;
+						vLampSet(1);
 					}
 				}
 			}
@@ -192,6 +210,7 @@ int main(void) {
 				{
 					vLedSetState(LedState_White, 100);
 					ledActive = 1;
+					vLampSet(1);
 				}
 			}
 			//currentMotion = MotionState_Off;
@@ -230,6 +249,7 @@ int main(void) {
 			{
 				ledActive = !ledActive;
 				vLedSetState(LedState_Off, 0);
+				vLampSet(0);
 			}
 		}
 	}

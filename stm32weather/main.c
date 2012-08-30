@@ -59,6 +59,14 @@ void InitAll(void)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 
+	/* Configure Lamp */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    GPIO_ResetBits(GPIOA, GPIO_Pin_1);
+
 	//vUsbserialInit();
 	vTimerInit();
 	vExtiInit();
@@ -165,7 +173,8 @@ int main(void)
 	//const uint8_t cmd[]={0x80, 0x4d, 0x75, 0x8f, 0xce, 0x88, 0xf};
 //	uint8_t buf[256];
 //	uint32_t j=0;
-	uint8_t state=1;
+	uint8_t state=1, lamp_state=0;
+	uint32_t lamp_time=0;
 
 	InitAll();
 
@@ -184,6 +193,15 @@ int main(void)
 				GPIO_SetBits(GPIOB, GPIO_Pin_1);
 			else
 				GPIO_ResetBits(GPIOB, GPIO_Pin_1);
+		}
+
+		if (lamp_state)
+		{
+			if ((uTimerGetMs()-lamp_time) > 1000 * 60)
+			{
+				lamp_state=0;
+				GPIO_ResetBits(GPIOA, GPIO_Pin_1);
+			}
 		}
 
 //		if (uUsbSerialDataAvailable())
@@ -215,44 +233,61 @@ int main(void)
 			if (payload_size==sizeof(Packet_t))
 			{
 				uNrfGetPayload((uint8_t *)&pkt, sizeof(Packet_t));
-				memcpy(sender, pkt.sender, 5);
-				memcpy(pkt.sender, NRF_OWN_ADDR, 5);
-				pkt.cmd|=PACKET_REPLY;
-
-				switch (GET_PACKET_CMD(pkt.cmd))
+				if ((pkt.cmd&PACKET_REPLY)==0)
 				{
-					case PACKET_PING:
+					memcpy(sender, pkt.sender, 5);
+					memcpy(pkt.sender, NRF_OWN_ADDR, 5);
+					pkt.cmd|=PACKET_REPLY;
+					pkt.status = 1;
+
+					switch (GET_PACKET_CMD(pkt.cmd))
 					{
-						//vIrledSend(cmd, sizeof(cmd)*8);
-						pkt.status = 1;
-						break;
-					}
-					case PACKET_AIR:
-					{
-						vIrledSend(pkt.data.ir, sizeof(pkt.data.ir) * 8);
-						pkt.status = 1;
-						break;
-					}
-					case PACKET_DHT22:
-					{
-						pkt.status = g_dht_status;
-						pkt.data.dht22[0] = g_dht1;
-						pkt.data.dht22[1] = g_dht2;
-						break;
-					}
-					case PACKET_PRESSURE:
-					{
-						pkt.status = 1;
-						pkt.data.pressure = uMpl115a1ReadPressure();
-						break;
-					}
-					default:
-					{
-						pkt.status = 0;
-						break;
-					}
-				};
-				vNrfSend((uint8_t *) sender, (uint8_t *) &pkt, sizeof(Packet_t));
+						case PACKET_PING:
+						{
+							//vIrledSend(cmd, sizeof(cmd)*8);
+							break;
+						}
+						case PACKET_AIR:
+						{
+							vIrledSend(pkt.data.ir, sizeof(pkt.data.ir) * 8);
+							break;
+						}
+						case PACKET_DHT22:
+						{
+							pkt.status = g_dht_status;
+							pkt.data.dht22[0] = g_dht1;
+							pkt.data.dht22[1] = g_dht2;
+							break;
+						}
+						case PACKET_PRESSURE:
+						{
+							pkt.data.pressure = uMpl115a1ReadPressure();
+							break;
+						}
+						case PACKET_LAMP_ON:
+						{
+							if (!lamp_state)
+							{
+								GPIO_SetBits(GPIOA, GPIO_Pin_1);
+								lamp_state = 1;
+							}
+							lamp_time = uTimerGetMs();
+							break;
+						}
+						case PACKET_LAMP_OFF:
+						{
+							GPIO_ResetBits(GPIOA, GPIO_Pin_1);
+							lamp_state = 0;
+							break;
+						}
+						default:
+						{
+							pkt.status = 0;
+							break;
+						}
+					};
+					vNrfSend((uint8_t *) sender, (uint8_t *) &pkt, sizeof(Packet_t));
+				}
 			}
 		}
     }

@@ -1,86 +1,98 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -O0 -g -c -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -DSTM32F103C8 -I. -Isemihosting -Icmsis -Icmsis_boot -Istm_lib -Istm_lib\inc -I..\libs">
-      <target file="spi.o" lastModified="138660bf3bc">
+      <target file="mpl115a1.o" lastModified="13978b1a39b">
+         <source file="..\..\..\libs\mpl115a1.c" lastModified="139646a3649"/>
+      </target>
+      <target file="spi.o" lastModified="13978b19a1a">
          <source file="..\..\..\libs\spi.c" lastModified="13862bf16f1"/>
       </target>
-      <target file="timer.o" lastModified="13930fb5bbd">
+      <target file="timer.o" lastModified="13978b19ce3">
          <source file="..\..\..\libs\timer.c" lastModified="1383cdd0c77"/>
       </target>
-      <target file="irled.o" lastModified="13930fb5fc2">
+      <target file="irled.o" lastModified="13978b1aa96">
          <source file="..\..\..\libs\irled.c" lastModified="138e3d2bf5c"/>
       </target>
-      <target file="stm32f10x_spi.o" lastModified="138660bfccb">
+      <target file="stm32f10x_spi.o" lastModified="13978b1a874">
          <source file="..\..\stm_lib\src\stm32f10x_spi.c" lastModified="1386387839b"/>
       </target>
-      <target file="exti.o" lastModified="1386640336c">
+      <target file="exti.o" lastModified="13978b1a4e4">
          <source file="..\..\..\libs\exti.c" lastModified="1386627dd3f"/>
       </target>
-      <target file="common.o" lastModified="13930fb5cbc">
+      <target file="common.o" lastModified="13978b19e6c">
          <source file="..\..\..\libs\common.c" lastModified="1390cae09eb"/>
       </target>
-      <target file="stm32f10x_rcc.o" lastModified="138660bf95e">
+      <target file="stm32f10x_iwdg.o" lastModified="13978b1ab23">
+         <source file="..\..\stm_lib\src\stm32f10x_iwdg.c" lastModified="13964117475"/>
+      </target>
+      <target file="stm32f10x_rcc.o" lastModified="13978b1a1fd">
          <source file="..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="138638767f6"/>
       </target>
-      <target file="core_cm3.o" lastModified="138660bf5f4">
+      <target file="core_cm3.o" lastModified="13978b19c56">
          <source file="..\..\cmsis\core_cm3.c" lastModified="13863874e33"/>
       </target>
-      <target file="printf.o" lastModified="138660bf8dc">
+      <target file="printf.o" lastModified="13978b1a15c">
          <source file="..\..\stdio\printf.c" lastModified="138638748f6"/>
       </target>
-      <target file="led.o" lastModified="13930fb5c4b">
+      <target file="led.o" lastModified="13978b19de6">
          <source file="..\..\..\libs\led.c" lastModified="138661b0392"/>
       </target>
-      <target file="stm32f10x_i2c.o" lastModified="138660bfd54">
+      <target file="stm32f10x_i2c.o" lastModified="13978b1a935">
          <source file="..\..\stm_lib\src\stm32f10x_i2c.c" lastModified="1386387865d"/>
       </target>
-      <target file="misc.o" lastModified="138660bfc52">
+      <target file="misc.o" lastModified="13978b1a6ff">
          <source file="..\..\stm_lib\src\misc.c" lastModified="138638836e0"/>
       </target>
-      <target file="tim4.o" lastModified="13930fb5e4a">
+      <target file="tim4.o" lastModified="13978b1a56c">
          <source file="..\..\..\libs\tim4.c" lastModified="13907a860f6"/>
       </target>
-      <target file="queue.o" lastModified="138660bfb8c">
-         <source file="..\..\..\libs\queue.c" lastModified="138443d2cfc"/>
+      <target file="queue.o" lastModified="13978b1a5f2">
+         <source file="..\..\..\libs\queue.c" lastModified="13963b39bc0"/>
       </target>
-      <target file="startup_stm32f10x_md.o" lastModified="138660bf758">
+      <target file="startup_stm32f10x_md.o" lastModified="13978b19ed3">
          <source file="..\..\cmsis_boot\startup\startup_stm32f10x_md.c" lastModified="13863875ac4"/>
       </target>
-      <target file="motion.o" lastModified="138660bf59d">
+      <target file="motion.o" lastModified="13978b19be0">
          <source file="..\..\..\libs\motion.c" lastModified="137e1c967f0"/>
       </target>
-      <target file="nrf.o" lastModified="13930fb5f0b">
-         <source file="..\..\..\libs\nrf.c" lastModified="13867fd4ac7"/>
+      <target file="nrf.o" lastModified="13978b1a9ec">
+         <source file="..\..\..\libs\nrf.c" lastModified="13964a22ff3"/>
       </target>
-      <target file="stm32f10x_gpio.o" lastModified="138660bf7cb">
+      <target file="stm32f10x_gpio.o" lastModified="13978b19ff1">
          <source file="..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="13863877594"/>
       </target>
-      <target file="stm32f10x_exti.o" lastModified="138660bfa34">
+      <target file="stm32f10x_exti.o" lastModified="13978b1a318">
          <source file="..\..\stm_lib\src\stm32f10x_exti.c" lastModified="13863877890"/>
       </target>
-      <target file="system_stm32f10x.o" lastModified="138660bf6b7">
+      <target file="system_stm32f10x.o" lastModified="13978b19d5f">
          <source file="..\..\cmsis_boot\system_stm32f10x.c" lastModified="13863875afa"/>
       </target>
-      <target file="syscalls.o" lastModified="138660bfaa4">
+      <target file="syscalls.o" lastModified="13978b1a440">
          <source file="..\..\syscalls\syscalls.c" lastModified="138638745e9"/>
       </target>
-      <target file="sh_cmd.o" lastModified="138660bfa50">
+      <target file="sh_cmd.o" lastModified="13978b1a3c9">
          <source file="..\..\semihosting\sh_cmd.s" lastModified="13863874b8d"/>
       </target>
-      <target file="stm32f10x_tim.o" lastModified="138660bf500">
+      <target file="stm32f10x_tim.o" lastModified="13978b19b66">
          <source file="..\..\stm_lib\src\stm32f10x_tim.c" lastModified="1386387f946"/>
       </target>
-      <target file="light.o" lastModified="13930fb5dd2">
-         <source file="..\..\..\libs\light.c" lastModified="1385372c1d0"/>
+      <target file="spi2.o" lastModified="13978b19f55">
+         <source file="..\..\..\libs\spi2.c" lastModified="13964a142a8"/>
       </target>
-      <target file="semihosting.o" lastModified="138660bf337">
+      <target file="semihosting.o" lastModified="13978b1996b">
          <source file="..\..\semihosting\semihosting.c" lastModified="13863874b87"/>
       </target>
-      <target file="stm32f10x_dma.o" lastModified="138660bfbf8">
+      <target file="light.o" lastModified="13978b1a298">
+         <source file="..\..\..\libs\light.c" lastModified="13964821122"/>
+      </target>
+      <target file="stm32f10x_wwdg.o" lastModified="13978b1a782">
+         <source file="..\..\stm_lib\src\stm32f10x_wwdg.c" lastModified="13964117742"/>
+      </target>
+      <target file="stm32f10x_dma.o" lastModified="13978b1a682">
          <source file="..\..\stm_lib\src\stm32f10x_dma.c" lastModified="138638a8278"/>
       </target>
-      <target file="main.o" lastModified="13930fc5ea0">
-         <source file="..\..\main.c" lastModified="13930fc5922"/>
+      <target file="main.o" lastModified="13978b1a098">
+         <source file="..\..\main.c" lastModified="13978b1906a"/>
       </target>
    </processor>
 </history>

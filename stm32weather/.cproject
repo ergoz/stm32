@@ -57,9 +57,9 @@
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/cmsis_boot" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/stm_lib" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/stm_lib/inc" kind="inc" path="" system="true"/>
-				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/semihosting" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/STM32_USB-FS-Device_Driver/inc" kind="inc" path="" system="true"/>
 				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/USB" kind="inc" path="" system="true"/>
+				<pathentry include="C:/CooCox/CoIDE/workspace/stm32/stm32weather/semihosting" kind="inc" path="" system="true"/>
 				<pathentry kind="mac" name="__GNUC__" path="" value=""/>
 				<pathentry kind="mac" name="STM32F10X_MD" path="" value=""/>
 				<pathentry kind="mac" name="USE_STDPERIPH_DRIVER" path="" value=""/>

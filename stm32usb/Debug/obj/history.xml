@@ -114,8 +114,8 @@
       <target file="otgd_fs_cal.o" lastModified="1390ca2fdb5">
          <source file="..\..\..\STM32_USB-FS-Device_Driver\src\otgd_fs_cal.c" lastModified="12ecc885c60"/>
       </target>
-      <target file="main.o" lastModified="13964a0e50c">
-         <source file="..\..\main.c" lastModified="13964a0d7b3"/>
+      <target file="main.o" lastModified="139789c0505">
+         <source file="..\..\main.c" lastModified="139789c0005"/>
       </target>
       <target file="startup_stm32f10x_hd.o" lastModified="1390ca2f551">
          <source file="..\..\cmsis_boot\startup\startup_stm32f10x_hd.c" lastModified="1381a27ec0b"/>

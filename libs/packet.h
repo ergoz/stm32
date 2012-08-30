@@ -33,6 +33,8 @@
 #define PACKET_AIR		0x02
 #define PACKET_LUX		0x03
 #define PACKET_PRESSURE	0x04
+#define PACKET_LAMP_ON	0x05
+#define PACKET_LAMP_OFF	0x06
 #define PACKET_CMD_MASK	0x7F
 
 #define GET_PACKET_CMD(x) 	(x&PACKET_CMD_MASK)
